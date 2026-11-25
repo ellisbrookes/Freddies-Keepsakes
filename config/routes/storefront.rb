@@ -65,5 +65,5 @@ get '/cart_link', to: 'store#cart_link', as: :cart_link
 
 # Footer content pages (privacy policy, returns, etc.)
 PagesController::PAGES.each_key do |slug|
-  get slug, to: 'pages#show', page: slug, as: "#{slug.underscore}_page"
+  get slug, to: "pages#show", page: slug, as: "#{slug.underscore}_page"
 end

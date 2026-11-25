@@ -60,10 +60,31 @@ module.exports = {
         '85': '85%',
       },
       colors: {
-        primary: '#EF3023',
-        black: '#222222',
-        'light-black': '#333333',
-        sand: '#F5F3F0',
+        // Freddies Personalised Boutique brand, sampled from the logo
+        brand: {
+          slate: '#566475',        // logo background
+          'slate-dark': '#465361',
+          'slate-deep': '#2E3843',
+          gold: '#D9B66A',         // "Boutique" lettering
+          'gold-light': '#EAD49A',
+          teal: '#78D5D7',         // elephant
+        },
+        // Teal-blue accent (buttons, links, highlights). 600 = default, passes AA with white text.
+        accent: {
+          50: '#EEF9FA',
+          100: '#D5F1F2',
+          200: '#ABE3E6',
+          300: '#78D5D7',
+          400: '#3FB3C2',
+          500: '#1F8AA3',
+          600: '#17748A',
+          700: '#115C6F',
+          800: '#0C4554',
+        },
+        primary: '#17748A',
+        black: '#28313B',          // slate ink (also the dark-mode background)
+        'light-black': '#38434F',
+        sand: '#F2F4F7',           // cool light grey page background
         pink: '#F6D7E2',
         seafoam: '#C1E0DE',
         plum: '#3A0E31',
@@ -75,15 +96,6 @@ module.exports = {
         yellow: '#FDC071',
         forrest: '#096756',
         dune: '#E6BF9B',
-        'solidus-red': '#EF3023',
-        red: {
-          100: '#F8D7D4',
-          200: '#F1AFA9',
-          300: '#EA877E',
-          400: '#E35F53',
-          500: '#DC3728',
-          600: '#B02C20',
-        },
         gray: {
           primary: '#C7CCC7',
           mid: '#D8DAD8',

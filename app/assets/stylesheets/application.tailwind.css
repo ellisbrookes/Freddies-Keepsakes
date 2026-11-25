@@ -27,7 +27,7 @@
   }
 
   .button-primary {
-    @apply w-fit py-3 px-7 rounded-full text-body-sm font-sans-md tracking-wider leading-none uppercase whitespace-nowrap transition-colors duration-200 bg-red-500 text-white hover:bg-red-700;
+    @apply w-fit py-3 px-7 rounded-full text-body-sm font-sans-md tracking-wider leading-none uppercase whitespace-nowrap transition-colors duration-200 bg-accent-600 text-white hover:bg-accent-700;
   }
 
   .categories-menu ul {
@@ -35,7 +35,7 @@
   }
 
   .categories-menu ul li.current a {
-    @apply text-primary;
+    @apply text-accent-600 lg:text-brand-gold-light;
   }
 
   /* Inputs */
@@ -128,7 +128,7 @@
 
   .checkout-header__steps > ol > li.current,
   .checkout-header__steps > ol > li.current-first {
-    @apply text-red-500;
+    @apply text-accent-600 dark:text-accent-300;
   }
 
   /* Badges */

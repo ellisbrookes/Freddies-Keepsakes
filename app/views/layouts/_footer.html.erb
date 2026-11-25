@@ -1,13 +1,17 @@
-<footer class="wrapper mx-auto grid-container w-full">
-  <div class="col-span-full border-t-[1px] border-t-black dark:border-t-white py-16">
+<footer class="bg-gradient-to-tr from-brand-slate-dark via-brand-slate to-[#677582] text-white mt-16">
+  <div class="wrapper mx-auto grid-container w-full">
+  <div class="col-span-full py-14">
     <div class="text-center col-span-full md:flex md:items-center md:justify-between md:col-start-2 md:col-span-10">
-      <div class="col-span-full mb-14 md:mb-0">
-        <%= image_tag "logo_full_with_label.svg", class: "mx-auto w-52 mb-7 dark:hidden" %>
-        <%= image_tag "logo_full_with_label_white.svg", class: "mx-auto w-52 mb-7 hidden dark:block" %>
-        <%= render partial: "shared/call_to_action", :locals => { :label => "Visit Solidus.io", :url => 'https://solidus.io', :target => '_blank', :additional_classes => "block mx-auto" } %>
+      <div class="col-span-full mb-10 md:mb-0">
+        <%= link_to root_path, title: current_store.name do %>
+          <%= image_tag "logo.png", alt: current_store.name, class: "mx-auto md:mx-0 w-56" %>
+        <% end %>
       </div>
-      <div class="col-span-full">
-        <%= render "shared/social_icons" %>
+      <div class="col-span-full flex flex-col items-center md:items-end gap-y-6">
+        <p class="font-serif text-body-md text-white/85 max-w-xs md:text-right">Personalised gifts, made with love.</p>
+        <div class="text-white/80">
+          <%= render "shared/social_icons" %>
+        </div>
       </div>
     </div>
     <%
@@ -31,4 +35,6 @@
       </div>
     <% end %>
   </div>
+  </div>
+  <p class="text-center text-body-xs text-white/60 pb-8">&copy; <%= Time.current.year %> <%= current_store.name %></p>
 </footer>

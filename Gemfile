@@ -2,8 +2,8 @@ source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.1.4", ">= 8.1.4.1"
-# The modern asset pipeline for Rails [https://github.com/rails/propshaft]
-gem "propshaft"
+# Sprockets asset pipeline (required by solidus_backend)
+gem "sprockets-rails"
 # Use sqlite3 as the database for Active Record
 gem "sqlite3", ">= 2.1"
 # Use the Puma web server [https://github.com/puma/puma]
@@ -64,3 +64,31 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "solidus", "~> 4.7"
+
+gem "solidus_auth_devise", "~> 2.6"
+gem "responders"
+gem "solidus_support", ">= 0.12.0"
+gem "view_component", "~> 3.0"
+gem "tailwindcss-rails", "~> 3.0"
+
+group :test do
+  gem "capybara-screenshot", "~> 1.0"
+  gem "database_cleaner", "~> 2.0"
+end
+
+group :development, :test do
+  gem "rspec-rails"
+  gem "rails-controller-testing", "~> 1.0.5"
+  gem "rspec-activemodel-mocks", "~> 1.1.0"
+  gem "factory_bot", ">= 4.8"
+  gem "factory_bot_rails"
+  gem "ffaker", "~> 2.13"
+  gem "rubocop", "~> 1.0"
+  gem "rubocop-performance", "~> 1.5"
+  gem "rubocop-rails", "~> 2.3"
+  gem "rubocop-rspec", "~> 3.0"
+end
+
+gem "solidus_admin", ">= 0.2"

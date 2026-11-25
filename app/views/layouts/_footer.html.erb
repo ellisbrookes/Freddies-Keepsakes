@@ -1,19 +1,57 @@
+<%
+  footer_columns = {
+    "Shop" => [
+      ["All Products", products_path],
+      ["My Account", spree_current_user ? account_path : login_path],
+      ["Basket", cart_path],
+    ],
+    "Customer Service" => [
+      ["Contact Us", contact_page_path],
+      ["Delivery Information", delivery_page_path],
+      ["Returns & Refunds", returns_page_path],
+      ["FAQs", faqs_page_path],
+    ],
+    "Legal" => [
+      ["Privacy Policy", privacy_policy_page_path],
+      ["Terms & Conditions", terms_page_path],
+      ["Cookie Policy", cookie_policy_page_path],
+    ],
+  }
+  footer_link_class = "text-body-sm text-white/75 transition-colors duration-200 hover:text-brand-gold-light"
+%>
 <footer class="bg-gradient-to-tr from-brand-slate-dark via-brand-slate to-[#677582] text-white mt-16">
-  <div class="wrapper mx-auto grid-container w-full">
-  <div class="col-span-full py-14">
-    <div class="text-center col-span-full md:flex md:items-center md:justify-between md:col-start-2 md:col-span-10">
-      <div class="col-span-full mb-10 md:mb-0">
+  <div class="wrapper">
+    <div class="grid grid-cols-2 gap-x-6 gap-y-10 py-14 md:grid-cols-12 md:gap-x-8">
+      <div class="col-span-2 flex flex-col items-center gap-y-6 md:col-span-4 md:items-start">
         <%= link_to root_path, title: current_store.name do %>
-          <%= image_tag "logo.png", alt: current_store.name, class: "mx-auto md:mx-0 w-56" %>
+          <%= image_tag "logo.png", alt: current_store.name, class: "w-48" %>
         <% end %>
-      </div>
-      <div class="col-span-full flex flex-col items-center md:items-end gap-y-6">
-        <p class="font-serif text-body-md text-white/85 max-w-xs md:text-right">Personalised gifts, made with love.</p>
         <div class="text-white/80">
           <%= render "shared/social_icons" %>
         </div>
       </div>
+
+      <% footer_columns.each_with_index do |(heading, links), index| %>
+        <nav class="<%= index.zero? ? 'md:col-start-7' : '' %> <%= index == 2 ? 'col-span-2 sm:col-span-1' : '' %> md:col-span-2 lg:col-span-2" aria-label="<%= heading %>">
+          <h2 class="mb-4 text-eyebrow uppercase font-sans-md text-brand-gold"><%= heading %></h2>
+          <ul class="flex flex-col gap-y-3">
+            <% links.each do |label, path| %>
+              <li><%= link_to label, path, class: footer_link_class %></li>
+            <% end %>
+          </ul>
+        </nav>
+      <% end %>
     </div>
+
+    <div class="flex flex-col items-center gap-4 border-t border-white/15 py-6 md:flex-row md:justify-between">
+      <p class="text-body-xs text-white/60">&copy; <%= Time.current.year %> <%= current_store.name %>. All rights reserved.</p>
+      <ul class="flex flex-wrap justify-center gap-x-5 gap-y-2">
+        <li><%= link_to "Privacy", privacy_policy_page_path, class: "text-body-xs text-white/60 hover:text-white" %></li>
+        <li><%= link_to "Terms", terms_page_path, class: "text-body-xs text-white/60 hover:text-white" %></li>
+        <li><%= link_to "Cookies", cookie_policy_page_path, class: "text-body-xs text-white/60 hover:text-white" %></li>
+      </ul>
+    </div>
+
     <%
       available_locales = current_store.available_locales.map do |locale|
         [
@@ -35,6 +73,4 @@
       </div>
     <% end %>
   </div>
-  </div>
-  <p class="text-center text-body-xs text-white/60 pb-8">&copy; <%= Time.current.year %> <%= current_store.name %></p>
 </footer>

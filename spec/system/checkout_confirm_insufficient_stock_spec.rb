@@ -61,11 +61,11 @@ RSpec.describe 'Checkout confirm page submission', :js, type: :system do
           check 'Agree to Terms of Service'
           click_button "Place Order"
           expect(page).to have_current_path checkout_state_path(:address)
-          click_button "Save and Continue"
+          save_and_continue
           expect(page).to have_current_path checkout_state_path(:delivery)
-          click_button "Save and Continue"
+          save_and_continue
           expect(page).to have_current_path checkout_state_path(:payment)
-          click_button "Save and Continue"
+          save_and_continue
           expect(page).to have_current_path checkout_state_path(:confirm)
           check 'Agree to Terms of Service'
           click_button "Place Order"

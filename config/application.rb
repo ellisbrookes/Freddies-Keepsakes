@@ -10,7 +10,7 @@ module FreddiesPersonalisedBoutique
   class Application < Rails::Application
     if defined?(FactoryBotRails)
       initializer after: "factory_bot.set_factory_paths" do
-        require 'spree/testing_support/factory_bot'
+        require "spree/testing_support/factory_bot"
 
         # The paths for Solidus' core factories.
         solidus_paths = Spree::TestingSupport::FactoryBot.definition_file_paths
@@ -24,7 +24,7 @@ module FreddiesPersonalisedBoutique
 
         # Your application's own factories.
         app_paths = [
-          Rails.root.join('spec/factories'),
+          Rails.root.join("spec/factories")
         ]
 
         FactoryBot.definition_file_paths = solidus_paths + extension_paths + app_paths
@@ -37,6 +37,11 @@ module FreddiesPersonalisedBoutique
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
+
+    # sassc-rails (pulled in by solidus_backend) defaults the CSS compressor to SassC,
+    # which can't parse Tailwind's modern CSS (e.g. `rgb(1 2 3 / 50%)`) and breaks
+    # tests and `assets:precompile`. Tailwind output is already minified.
+    config.assets.css_compressor = nil
 
     # Configuration for the application, engines, and railties goes here.
     #

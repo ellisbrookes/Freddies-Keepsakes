@@ -3,7 +3,7 @@
 require 'solidus_starter_frontend_spec_helper'
 
 RSpec.describe 'Address', type: :system do
-  include  SolidusStarterFrontend::System::CheckoutHelpers
+  include SolidusStarterFrontend::System::CheckoutHelpers
   include_context 'featured products'
 
   let!(:product) { create(:product, name: "Solidus mug set") }
@@ -13,7 +13,7 @@ RSpec.describe 'Address', type: :system do
     visit products_path
 
     click_link 'Solidus mug set'
-    click_button 'add-to-cart-button'
+    add_to_cart
 
     address = 'order_bill_address_attributes'
     @state_select_css = "##{address}_state_id"

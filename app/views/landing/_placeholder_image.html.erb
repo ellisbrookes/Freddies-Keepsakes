@@ -1,0 +1,7 @@
+<%# Stand-in for a photo until real imagery is ready. %>
+<div class="flex flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed <%= local_assigns[:dark] ? 'border-white/30 bg-white/5 text-white/60' : 'border-gray-300 bg-white text-gray-500 dark:border-white/15 dark:bg-light-black dark:text-gray-300' %> <%= local_assigns[:classes] %>">
+  <svg class="w-10 h-10 fill-current" aria-hidden="true">
+    <use xlink:href="<%= image_path('remixicon.symbol.svg') %>#ri-image-line"></use>
+  </svg>
+  <span class="text-body-xs uppercase tracking-[0.14em] font-sans-md"><%= local_assigns.fetch(:label, "Image placeholder") %></span>
+</div>

@@ -33,7 +33,7 @@ RSpec.describe 'Automatic promotions', type: :system, js: true do
     before do
       visit products_path
       click_link product.name
-      click_button "add-to-cart-button"
+      add_to_cart
     end
 
     it "automatically applies the promotion once the order crosses the threshold" do

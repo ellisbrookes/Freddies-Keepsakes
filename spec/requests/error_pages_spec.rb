@@ -28,7 +28,7 @@ RSpec.describe 'Error pages', type: :request do
 
         it 'links back into the site' do
           expect(html).to include('href="/"')
-          expect(html).to include('href="/products"')
+          expect(html).to include('href="/store"')
         end
 
         it 'is kept out of search engines' do
@@ -76,7 +76,7 @@ RSpec.describe 'Error pages', type: :request do
     it 'shows the branded 422 page for a rejected request' do
       allow_any_instance_of(HomeController).to receive(:index).and_raise(ActionController::InvalidAuthenticityToken)
 
-      get root_path
+      get store_path
 
       expect(response).to have_http_status(:unprocessable_content)
       expect(response.body).to include('<h1>Request not completed</h1>')
@@ -85,7 +85,7 @@ RSpec.describe 'Error pages', type: :request do
     it 'shows the branded 500 page for an unexpected error' do
       allow_any_instance_of(HomeController).to receive(:index).and_raise(StandardError, 'boom')
 
-      get root_path
+      get store_path
 
       expect(response).to have_http_status(:internal_server_error)
       expect(response.body).to include('<h1>Something went wrong</h1>', 'src="/error-logo.png"')

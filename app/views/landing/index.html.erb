@@ -1,16 +1,16 @@
-<%# Brand homepage. All copy and imagery below are placeholders. %>
+<%# Brand homepage. Images and customer reviews are still placeholders. %>
 <% brand_gradient = "bg-gradient-to-tr from-brand-slate-dark via-brand-slate to-[#677582]" %>
 
 <%# Hero %>
 <section class="<%= brand_gradient %> text-white">
   <div class="wrapper grid-container items-center gap-y-10 py-16 md:py-24">
     <div class="col-span-full md:col-span-6 flex flex-col items-start gap-6">
-      <p class="text-eyebrow uppercase font-sans-md text-brand-gold">Hero eyebrow placeholder</p>
-      <h1 class="font-serif text-h4 md:text-h2">Your main headline will go here</h1>
-      <p class="text-body-md text-white/80 max-w-lg">A short introduction to Freddies Personalised Boutique. One or two sentences about what you make and who it's for.</p>
+      <p class="text-eyebrow uppercase font-sans-md text-brand-gold">Personalised gifts, made with love</p>
+      <h1 class="font-serif text-h4 md:text-h2">It's the little personal touches that make something extra special</h1>
+      <p class="text-body-md text-white/80 max-w-lg">Personalised tops, jumpers, cups and lots of other lovely goodies. Whether it's the perfect gift for someone you love, a treat for yourself or something completely unique, I'm here to help bring your ideas to life.</p>
       <div class="flex flex-wrap gap-4">
         <%= render "shared/call_to_action", label: "Shop the store", url: store_path %>
-        <%= link_to "Our story", "#our-story", class: "w-fit py-3 px-7 rounded-full text-body-sm font-sans-md tracking-wider leading-none uppercase whitespace-nowrap border border-white/40 text-white transition-colors duration-200 hover:border-brand-gold-light hover:text-brand-gold-light" %>
+        <%= link_to "Meet the maker", "#our-story", class: "w-fit py-3 px-7 rounded-full text-body-sm font-sans-md tracking-wider leading-none uppercase whitespace-nowrap border border-white/40 text-white transition-colors duration-200 hover:border-brand-gold-light hover:text-brand-gold-light" %>
       </div>
     </div>
     <div class="col-span-full md:col-span-5 md:col-start-8">
@@ -22,11 +22,11 @@
 <%# Featured categories %>
 <section class="wrapper py-16 md:py-24">
   <div class="flex flex-col items-center text-center gap-3 mb-10 md:mb-14">
-    <p class="text-eyebrow uppercase font-sans-md text-accent-600 dark:text-accent-300">Shop by category</p>
-    <h2 class="font-serif text-h5 md:text-h3">Section heading placeholder</h2>
+    <p class="text-eyebrow uppercase font-sans-md text-accent-600 dark:text-accent-300">What I make</p>
+    <h2 class="font-serif text-h5 md:text-h3">Lovely personalised goodies</h2>
   </div>
   <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-    <% ["Category one", "Category two", "Category three"].each do |name| %>
+    <% ["Tops", "Jumpers", "Cups"].each do |name| %>
       <%= link_to store_path, class: "group flex flex-col gap-4" do %>
         <%= render "landing/placeholder_image", label: "#{name} image", classes: "aspect-square w-full transition-colors group-hover:border-accent-300" %>
         <span class="flex items-center justify-between font-sans-md text-body-md">
@@ -48,9 +48,9 @@
       <h2 class="font-serif text-h5 md:text-h3">Personalised in three steps</h2>
     </div>
     <ol class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <% [["Choose", "Placeholder text describing how customers pick a product."],
-          ["Personalise", "Placeholder text about adding names, dates or messages."],
-          ["We make it", "Placeholder text about how it's made and delivered."]].each_with_index do |(step, text), index| %>
+      <% [["Choose", "Pick a top, jumper, cup or any of the other goodies in the store."],
+          ["Personalise", "Add the names, dates or words that make it yours, or tell me your own idea."],
+          ["Made with love", "I make every order with care, love and attention, then send it on its way to you."]].each_with_index do |(step, text), index| %>
         <li class="flex flex-col items-center text-center gap-4 rounded-2xl bg-sand dark:bg-black p-8">
           <span class="flex h-12 w-12 items-center justify-center rounded-full bg-brand-slate text-brand-gold font-serif-md text-body-20"><%= index + 1 %></span>
           <h3 class="font-sans-md text-body-20"><%= step %></h3>
@@ -68,11 +68,16 @@
       <%= render "landing/placeholder_image", label: "Story image", classes: "aspect-4/5 md:aspect-square w-full" %>
     </div>
     <div class="col-span-full md:col-span-5 md:col-start-8 flex flex-col items-start gap-6">
-      <p class="text-eyebrow uppercase font-sans-md text-accent-600 dark:text-accent-300">Our story</p>
-      <h2 class="font-serif text-h5 md:text-h3">About the boutique placeholder</h2>
-      <p class="text-body text-gray-600 dark:text-gray-300 leading-relaxed">A few sentences about who's behind Freddies Personalised Boutique, how it started and what makes the products special. Replace this placeholder once the copy is ready.</p>
-      <p class="text-body text-gray-600 dark:text-gray-300 leading-relaxed">A second paragraph can go here for anything else worth sharing.</p>
-      <%= render "shared/call_to_action", label: "Browse products", url: products_path, type: "tertiary" %>
+      <p class="text-eyebrow uppercase font-sans-md text-accent-600 dark:text-accent-300">Hi, and welcome! 👋</p>
+      <h2 class="font-serif text-h5 md:text-h3">The face behind the business</h2>
+      <p class="text-body text-gray-600 dark:text-gray-300 leading-relaxed">I'm so happy you're here! I started my business with one very special reason in mind: to be able to spend more time at home with my little boy while doing something I absolutely love.</p>
+      <p class="text-body text-gray-600 dark:text-gray-300 leading-relaxed">I'm a small, one-person business creating personalised products, including tops, jumpers, cups and lots of other lovely personalised goodies.</p>
+      <p class="text-body text-gray-600 dark:text-gray-300 leading-relaxed">As a small business, every order really does mean the world to me. I put care, love and attention into everything I create, and I want every customer to feel special and happy with their purchase.</p>
+      <p class="font-serif text-body-md">Lots of love,<br>The face behind the business ❤️</p>
+      <div class="flex flex-wrap gap-4">
+        <%= render "shared/call_to_action", label: "Browse products", url: products_path, type: "tertiary" %>
+        <%= render "shared/call_to_action", label: "Get in touch", url: contact_page_path, type: "secondary", additional_classes: "border border-gray-300 dark:border-gray-600" %>
+      </div>
     </div>
   </div>
 </section>
@@ -102,8 +107,8 @@
 <section class="wrapper pt-16 md:pt-24">
   <div class="<%= brand_gradient %> rounded-2xl px-8 py-14 md:py-20 text-center text-white shadow-sm flex flex-col items-center gap-6">
     <%= image_tag "logo_mark.png", alt: "", class: "h-16 w-16" %>
-    <h2 class="font-serif text-h5 md:text-h3">Closing headline placeholder</h2>
-    <p class="text-body-md text-white/80 max-w-xl">A final nudge towards the store.</p>
+    <h2 class="font-serif text-h5 md:text-h3">Thank you so much for stopping by</h2>
+    <p class="text-body-md text-white/80 max-w-xl">Supporting my little business and being part of my journey genuinely means more than you know.</p>
     <%= render "shared/call_to_action", label: "Visit the store", url: store_path %>
   </div>
 </section>

@@ -2,4 +2,9 @@
 # CVEs that are not relevant to the application can be enumerated on the ignore list below.
 
 ignore:
-  - CVE-THAT-DOES-NOT-APPLY
+  # view_component: slot/with_content state can leak when one component
+  # instance is reused across requests. This app builds a new instance on every
+  # render and never caches or memoizes them, so it isn't affected. The fix is
+  # only in view_component >= 4.14, but solidus_admin 0.5.1 pins ~> 3.9.
+  # Remove this once solidus_admin allows view_component 4.
+  - GHSA-8qw7-6phv-7q6p

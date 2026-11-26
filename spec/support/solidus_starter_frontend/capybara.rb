@@ -13,9 +13,15 @@ RSpec.configure do |config|
   end
 
   config.before(:each, type: :system, js: true) do |example|
-    screen_size = example.metadata[:screen_size] || [1800, 1400]
+    screen_size = example.metadata[:screen_size] || [ 1800, 1400 ]
     driven_by(:selenium, using: :headless_chrome, screen_size: screen_size) do |capabilities|
       capabilities.add_argument("--disable-search-engine-choice-screen")
+      # Stop Chrome's password manager from popping up a "password found in a
+      # data breach" dialog after the first login, which blocks all clicks.
+      capabilities.add_argument("--disable-features=PasswordLeakDetection")
+      capabilities.add_preference("credentials_enable_service", false)
+      capabilities.add_preference("profile.password_manager_enabled", false)
+      capabilities.add_preference("profile.password_manager_leak_detection", false)
     end
   end
 end

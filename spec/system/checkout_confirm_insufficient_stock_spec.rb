@@ -30,7 +30,7 @@ RSpec.describe 'Checkout confirm page submission', :js, type: :system do
 
         it 'redirects to cart page and shows an unavailable product message' do
           check 'Agree to Terms of Service'
-          click_button "Place Order"
+          click_and_wait_for_page_load "Place Order"
           expect(page).to have_content "#{order_product.name} became unavailable"
           expect(page).to have_current_path cart_path
         end
@@ -51,7 +51,7 @@ RSpec.describe 'Checkout confirm page submission', :js, type: :system do
 
         it "redirects to the address checkout page and shows an availability changed message" do
           check 'Agree to Terms of Service'
-          click_button "Place Order"
+          click_and_wait_for_page_load "Place Order"
           error_message = "Quantity selected of #{order_product.name} is not available. Still, items may be available from another stock location, please try again."
           expect(page).to have_content error_message
           expect(page).to have_current_path checkout_state_path(:address)
@@ -59,7 +59,7 @@ RSpec.describe 'Checkout confirm page submission', :js, type: :system do
 
         it "can still complete the order using the backorderable stock location by restarting the checkout" do
           check 'Agree to Terms of Service'
-          click_button "Place Order"
+          click_and_wait_for_page_load "Place Order"
           expect(page).to have_current_path checkout_state_path(:address)
           save_and_continue
           expect(page).to have_current_path checkout_state_path(:delivery)
@@ -68,7 +68,7 @@ RSpec.describe 'Checkout confirm page submission', :js, type: :system do
           save_and_continue
           expect(page).to have_current_path checkout_state_path(:confirm)
           check 'Agree to Terms of Service'
-          click_button "Place Order"
+          click_and_wait_for_page_load "Place Order"
           expect(page).to have_content 'Your order has been processed successfully'
         end
       end

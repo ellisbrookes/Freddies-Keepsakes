@@ -7,16 +7,16 @@ class StoreController < Spree::BaseController
 
   etag { config_locale }
 
-  layout 'storefront'
+  layout "storefront"
 
   def unauthorized
-    render 'shared/auth/unauthorized', status: :unauthorized
+    render "shared/auth/unauthorized", status: :unauthorized
   end
 
   def cart_link
-    return unless stale?(etag: current_order, template: 'shared/cart/_link_to_cart')
+    return unless stale?(etag: current_order, template: "shared/cart/_link_to_cart")
 
-    render partial: 'shared/cart/link_to_cart'
+    render partial: "shared/cart/link_to_cart"
   end
 
   private
@@ -28,7 +28,7 @@ class StoreController < Spree::BaseController
   def lock_order
     Spree::OrderMutex.with_lock!(@order) { yield }
   rescue Spree::OrderMutex::LockFailed
-    flash[:error] = t('spree.order_mutex_error')
+    flash[:error] = t("spree.order_mutex_error")
     redirect_to cart_path
   end
 end

@@ -14,7 +14,7 @@
   </fieldset>
 
   <div class="order-page__actions mb-6 p-6 text-end lg:text-center">
-    <%= render partial: "shared/call_to_action", :locals => { :label => t('spree.back_to_store'), :url => root_path } %>
+    <%= render partial: "shared/call_to_action", :locals => { :label => t('spree.back_to_store'), :url => store_path } %>
 
     <% unless order_just_completed?(@order) %>
       <% if spree_current_user && respond_to?(:account_path) %>

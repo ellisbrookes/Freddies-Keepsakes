@@ -6,3 +6,9 @@ inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 # # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
 # Layout/SpaceInsideArrayLiteralBrackets:
 #   Enabled: false
+
+AllCops:
+  Exclude:
+    # Migrations copied in by the Solidus installers; keep them identical to upstream.
+    # Engine migrations are named <timestamp>_<name>.<engine>.rb.
+    - "db/migrate/*.*.rb"

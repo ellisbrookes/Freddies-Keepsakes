@@ -3,7 +3,7 @@
 require 'solidus_starter_frontend_spec_helper'
 
 RSpec.feature 'Checkout', :js, type: :system do
-  include  SolidusStarterFrontend::System::CheckoutHelpers
+  include SolidusStarterFrontend::System::CheckoutHelpers
 
   given!(:store) { create(:store) }
   given!(:country) { create(:country, name: 'United States', states_required: true) }
@@ -17,7 +17,7 @@ RSpec.feature 'Checkout', :js, type: :system do
 
   given!(:zone)    { create(:zone) }
   given!(:address) { create(:address) }
-  given!(:payment_method){ create :check_payment_method }
+  given!(:payment_method) { create :check_payment_method }
 
   background do
     @product = create(:product, name: 'Solidus hoodie')
@@ -33,9 +33,9 @@ RSpec.feature 'Checkout', :js, type: :system do
   scenario 'leaving and returning to address step' do
     stub_spree_preferences(Spree::Auth::Config, registration_step: true)
     click_link 'Solidus hoodie'
-    click_button 'Add To Cart'
+    add_to_cart
     within('h1') { expect(page).to have_text 'Shopping Cart' }
-    click_button 'Checkout'
+    click_and_wait_for_page_load "Checkout"
 
     within '#guest_checkout' do
       fill_in 'Email', with: 'test@example.com'
@@ -44,7 +44,7 @@ RSpec.feature 'Checkout', :js, type: :system do
 
     click_on 'Cart'
 
-    click_on 'Checkout'
+    click_and_wait_for_page_load "Checkout"
 
     expect(page).to have_content "Billing Address"
   end
@@ -52,9 +52,9 @@ RSpec.feature 'Checkout', :js, type: :system do
   context 'without payment being required' do
     scenario 'allow a visitor to checkout as guest, without registration' do
       click_link 'Solidus hoodie'
-      click_button 'Add To Cart'
+      add_to_cart
       within('h1') { expect(page).to have_text 'Shopping Cart' }
-      click_button 'Checkout'
+      click_and_wait_for_page_load "Checkout"
 
       expect(page).to have_content(/Checkout as a Guest/i)
 
@@ -65,10 +65,10 @@ RSpec.feature 'Checkout', :js, type: :system do
       expect(page).to have_text(/Shipping Address/i)
 
       fill_addresses_fields_with(address)
-      click_button 'Save and Continue'
+      save_and_continue
 
-      click_button 'Save and Continue'
-      click_button 'Save and Continue'
+      save_and_continue
+      save_and_continue
       check 'Agree to Terms of Service'
       click_button 'Place Order'
 
@@ -78,7 +78,7 @@ RSpec.feature 'Checkout', :js, type: :system do
     scenario 'associate an uncompleted guest order with user after logging in' do
       user = create(:user, email: 'email@person.com', password: 'password', password_confirmation: 'password')
       click_link 'Solidus hoodie'
-      click_button 'Add To Cart'
+      add_to_cart
 
       visit login_path
       fill_in 'Email', with: user.email
@@ -89,13 +89,13 @@ RSpec.feature 'Checkout', :js, type: :system do
       expect(page).to have_text 'Solidus hoodie'
       within('h1') { expect(page).to have_text 'Shopping Cart' }
 
-      click_button 'Checkout'
+      click_and_wait_for_page_load "Checkout"
 
       fill_addresses_fields_with(address)
-      click_button 'Save and Continue'
+      save_and_continue
 
-      click_button 'Save and Continue'
-      click_button 'Save and Continue'
+      save_and_continue
+      save_and_continue
       check 'Agree to Terms of Service'
       click_button 'Place Order'
 
@@ -107,7 +107,7 @@ RSpec.feature 'Checkout', :js, type: :system do
     scenario 'associate an incomplete guest order with user after successful password reset' do
       create(:user, email: 'email@person.com', password: 'password', password_confirmation: 'password')
       click_link 'Solidus hoodie'
-      click_button 'Add To Cart'
+      add_to_cart
 
       visit login_path
       click_link 'Forgot Password?'
@@ -116,7 +116,10 @@ RSpec.feature 'Checkout', :js, type: :system do
 
       # Need to do this now because the token stored in the DB is the encrypted version
       # The 'plain-text' version is sent in the email and there's one way to get that!
-      reset_password_email = ActionMailer::Base.deliveries.first
+      # Wait for the request to finish so the email has actually been sent.
+      reset_password_email = page.document.synchronize do
+        ActionMailer::Base.deliveries.first || raise(Capybara::ExpectationNotMet, "reset email not sent yet")
+      end
       token_url_regex = /\/user\/password\/edit\?reset_password_token=(.*)$/
       token = token_url_regex.match(reset_password_email.body.to_s)[1]
 
@@ -126,18 +129,18 @@ RSpec.feature 'Checkout', :js, type: :system do
       click_button 'Update'
 
       click_link 'Cart'
-      click_button 'Checkout'
+      click_and_wait_for_page_load "Checkout"
 
       fill_addresses_fields_with(address)
-      click_button 'Save and Continue'
+      save_and_continue
 
       expect(page).not_to have_text 'Email is invalid'
     end
 
     scenario 'allow a user to register during checkout' do
       click_link 'Solidus hoodie'
-      click_button 'Add To Cart'
-      click_button 'Checkout'
+      add_to_cart
+      click_and_wait_for_page_load "Checkout"
 
       within '#existing-customer' do
         click_link 'Create a new account'
@@ -151,10 +154,10 @@ RSpec.feature 'Checkout', :js, type: :system do
       expect(page).to have_text 'You have signed up successfully.'
 
       fill_addresses_fields_with(address)
-      click_button 'Save and Continue'
+      save_and_continue
 
-      click_button 'Save and Continue'
-      click_button 'Save and Continue'
+      save_and_continue
+      save_and_continue
       check 'Agree to Terms of Service'
       click_button 'Place Order'
 

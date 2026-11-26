@@ -4,7 +4,7 @@ require 'solidus_starter_frontend_spec_helper'
 
 RSpec.feature 'Sign Out', type: :system, js: true do
   include_context "featured products"
-  
+
   given!(:user) do
    create(:user,
           email: 'email@person.com',
@@ -23,7 +23,7 @@ RSpec.feature 'Sign Out', type: :system, js: true do
 
   scenario 'allow a signed in user to logout' do
     click_link '', href: '/account'
-    click_button 'Logout'
+    click_and_wait_for_page_load 'Logout'
     visit root_path
     expect(page).to have_link nil, href: '/login'
     expect(page).not_to have_button 'Logout'

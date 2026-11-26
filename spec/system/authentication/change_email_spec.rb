@@ -16,7 +16,7 @@ RSpec.feature 'Change email', type: :system do
 
     fill_in 'spree_user[email]', with: user.email
     fill_in 'spree_user[password]', with: 'secret'
-    click_button 'Login'
+    click_and_wait_for_page_load 'Login'
 
     visit edit_account_path
   end

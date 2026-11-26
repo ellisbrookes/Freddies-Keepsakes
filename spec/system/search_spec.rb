@@ -19,11 +19,13 @@ RSpec.describe 'searching products', :js, type: :system do
 
   it 'shows autocomplete suggestions' do
     fill_search_input_with 'Solidus'
+    wait_for_autocomplete
     expect(page.all('[data-search-target="result"]').size).to eq(6)
   end
 
   it 'automatically selects the first suggestion' do
     fill_search_input_with 'Solidus'
+    wait_for_autocomplete
     expect(page.all('[data-search-target="result"]')[0][:class]).to include('text-primary')
   end
 
@@ -71,8 +73,10 @@ RSpec.describe 'searching products', :js, type: :system do
     expect(page).not_to have_selector('[data-search-target="result"]', visible: true)
   end
 
+  # Opening the search bar submits an empty search whose "No results" list can
+  # arrive after the real one, so wait for an actual match to be shown.
   def wait_for_autocomplete
-    expect(page).to have_selector('[data-search-target="result"]', visible: true)
+    expect(page).to have_selector('[data-search-target="result"] a', text: 'Solidus hoodie', visible: true)
   end
 
   def fill_search_input_with(text)

@@ -4,7 +4,7 @@ require 'solidus_starter_frontend_spec_helper'
 
 RSpec.describe 'Coupon code promotions', type: :system, js: true do
   include_context 'featured products'
-  include  SolidusStarterFrontend::System::CheckoutHelpers
+  include SolidusStarterFrontend::System::CheckoutHelpers
 
   let!(:store) { create(:store) }
   let!(:zone) { create(:zone) }
@@ -41,14 +41,14 @@ RSpec.describe 'Coupon code promotions', type: :system, js: true do
         before do
           visit products_path
           click_link "Solidus mug set"
-          click_button "add-to-cart-button"
+          add_to_cart
           checkout_as_guest
           fill_addresses_fields_with(address)
 
           # To shipping method screen
-          click_button "Save and Continue"
+          save_and_continue
           # To payment screen
-          click_button "Save and Continue"
+          save_and_continue
         end
 
         it "informs about an invalid coupon code" do
@@ -96,14 +96,14 @@ RSpec.describe 'Coupon code promotions', type: :system, js: true do
           before do
             visit products_path
             click_link "Solidus mug set"
-            click_button "add-to-cart-button"
+            add_to_cart
             # To Cart
-            click_button "Checkout"
+            click_and_wait_for_page_load "Checkout"
             # To shipping method screen, address is auto-populated
             # with user's saved addresses
-            click_button "Save and Continue"
+            save_and_continue
             # To payment screen
-            click_button "Save and Continue"
+            save_and_continue
           end
 
           it "shows wallet payments on coupon code errors" do
@@ -123,7 +123,7 @@ RSpec.describe 'Coupon code promotions', type: :system, js: true do
       before do
         visit products_path
         click_link "Solidus mug set"
-        click_button "add-to-cart-button"
+        add_to_cart
       end
 
       it "can enter a coupon code and receives success notification" do
@@ -159,7 +159,7 @@ RSpec.describe 'Coupon code promotions', type: :system, js: true do
 
           fill_in "coupon_code", with: "onetwo"
           click_button "Apply Code"
-          expect(page).to have_content(I18n.t(:item_total_less_than_or_equal, scope: [:spree, :eligibility_errors, :messages], amount: "$100.00"))
+          expect(page).to have_content(I18n.t(:item_total_less_than_or_equal, scope: [ :spree, :eligibility_errors, :messages ], amount: "$100.00"))
         end
       end
 
@@ -185,7 +185,7 @@ RSpec.describe 'Coupon code promotions', type: :system, js: true do
         specify do
           visit products_path
           click_link "Solidus cap"
-          click_button "add-to-cart-button"
+          add_to_cart
 
           visit cart_path
           fill_in "coupon_code", with: "onetwo"
@@ -226,7 +226,7 @@ RSpec.describe 'Coupon code promotions', type: :system, js: true do
         specify do
           visit products_path
           click_link "Solidus cap"
-          click_button "add-to-cart-button"
+          add_to_cart
 
           visit cart_path
 

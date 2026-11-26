@@ -3,7 +3,7 @@
 require 'solidus_starter_frontend_spec_helper'
 
 RSpec.describe 'Free shipping promotions', type: :system, js: true do
-  include  SolidusStarterFrontend::System::CheckoutHelpers
+  include SolidusStarterFrontend::System::CheckoutHelpers
 
   let!(:store) { create(:store) }
   let!(:country) { create(:country, name: "United States of America", states_required: true) }
@@ -22,7 +22,7 @@ RSpec.describe 'Free shipping promotions', type: :system, js: true do
     create(
       :promotion,
       apply_automatically: true,
-      promotion_actions: [Spree::Promotion::Actions::FreeShipping.new],
+      promotion_actions: [ Spree::Promotion::Actions::FreeShipping.new ],
       name: "Free Shipping",
       starts_at: 1.day.ago,
       expires_at: 1.day.from_now,
@@ -33,7 +33,7 @@ RSpec.describe 'Free shipping promotions', type: :system, js: true do
     before do
       visit products_path
       click_link "Solidus mug set"
-      click_button "add-to-cart-button"
+      add_to_cart
       checkout_as_guest
       fill_in "order_email", with: "spree@example.com"
       fill_in "Name", with: "John Smith"
@@ -45,9 +45,9 @@ RSpec.describe 'Free shipping promotions', type: :system, js: true do
       fill_in "Phone", with: "555-555-5555"
 
       # To shipping method screen
-      click_button "Save and Continue"
+      save_and_continue
       # To payment screen
-      click_button "Save and Continue"
+      save_and_continue
     end
 
     # Regression test for https://github.com/spree/spree/issues/4428

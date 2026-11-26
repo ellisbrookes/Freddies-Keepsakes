@@ -3,7 +3,7 @@
 require 'solidus_starter_frontend_spec_helper'
 
 RSpec.describe 'First Order promotion', type: :system do
-  include  SolidusStarterFrontend::System::CheckoutHelpers
+  include SolidusStarterFrontend::System::CheckoutHelpers
 
   let!(:promotion) do
     FactoryBot.create(
@@ -44,7 +44,7 @@ RSpec.describe 'First Order promotion', type: :system do
     checkout_as_guest
     fill_in "Customer email", with: "sam@tom.com"
     fill_in_address
-    click_on "Save and Continue"
+    save_and_continue
     expect(page).to_not have_content("#summary-order-charges")
   end
 

@@ -29,7 +29,7 @@ RSpec.describe 'checkout with unshippable items', type: :system do
     visit checkout_state_path(:delivery)
     expect(page).to have_content('Unshippable Items')
 
-    click_button "Save and Continue"
+    save_and_continue
 
     order.reload
     expect(order.line_items.count).to eq 1

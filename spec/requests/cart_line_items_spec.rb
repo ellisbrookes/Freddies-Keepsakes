@@ -44,7 +44,7 @@ RSpec.describe 'Cart Line Items', type: :request do
             params: { variant_id: variant.id, quantity: -1 }
           )
 
-          expect(response).to redirect_to(root_path)
+          expect(response).to redirect_to(store_path)
           expect(flash[:error]).to eq(
             I18n.t('spree.please_enter_reasonable_quantity')
           )

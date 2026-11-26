@@ -231,7 +231,7 @@ RSpec.describe 'Checkout', :js, type: :system do
       visit checkout_path
       order.payments.first.update state: :void
       check 'Agree to Terms of Service'
-      click_button 'Place Order'
+      click_and_wait_for_page_load "Place Order"
       expect(page).to have_current_path checkout_state_path(:payment)
     end
   end
@@ -259,7 +259,7 @@ RSpec.describe 'Checkout', :js, type: :system do
       fill_in "Card Code", with: '123'
       save_and_continue
       check 'Agree to Terms of Service'
-      click_button "Place Order"
+      click_and_wait_for_page_load "Place Order"
       expect(page).to have_content("Bogus Gateway: Forced failure")
       expect(page.current_url).to include("/checkout/payment")
     end
@@ -337,7 +337,7 @@ RSpec.describe 'Checkout', :js, type: :system do
       expect(page).to have_content("Confirm")
 
       check "Agree to Terms of Service"
-      click_on "Place Order"
+      click_and_wait_for_page_load "Place Order"
       expect(page).to have_content(I18n.t('spree.order_processed_successfully'))
     end
   end
@@ -401,7 +401,7 @@ RSpec.describe 'Checkout', :js, type: :system do
 
       save_and_continue
       check 'Agree to Terms of Service'
-      click_on "Place Order"
+      click_and_wait_for_page_load "Place Order"
 
       order = Spree::Order.last
       expect(page).to have_current_path(order_path(order))
@@ -414,7 +414,7 @@ RSpec.describe 'Checkout', :js, type: :system do
 
       save_and_continue
       check 'Agree to Terms of Service'
-      click_on "Place Order"
+      click_and_wait_for_page_load "Place Order"
 
       order = Spree::Order.last
       expect(page).to have_current_path(order_path(order))
@@ -446,7 +446,7 @@ RSpec.describe 'Checkout', :js, type: :system do
       save_and_continue
       save_and_continue
       check 'Agree to Terms of Service'
-      click_on "Place Order"
+      click_and_wait_for_page_load "Place Order"
 
       order = Spree::Order.last
       expect(page).to have_current_path(token_order_path(order, order.guest_token))
@@ -587,7 +587,7 @@ RSpec.describe 'Checkout', :js, type: :system do
 
       expect(current_path).to eq checkout_state_path('confirm')
       check 'Agree to Terms of Service'
-      click_button "Place Order"
+      click_and_wait_for_page_load "Place Order"
     end
   end
 
@@ -638,7 +638,7 @@ RSpec.describe 'Checkout', :js, type: :system do
       save_and_continue
       save_and_continue
       check 'Agree to Terms of Service'
-      click_button "Place Order"
+      click_and_wait_for_page_load "Place Order"
     end
 
     it "displays a thank you message" do

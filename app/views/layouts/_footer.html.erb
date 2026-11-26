@@ -46,7 +46,10 @@
     </div>
 
     <div class="flex flex-col items-center gap-4 border-t border-white/15 py-6 md:flex-row md:justify-between">
-      <p class="text-body-xs text-white/60">&copy; <%= Time.current.year %> <%= current_store.name %>. All rights reserved.</p>
+      <div class="flex flex-col items-center gap-1 md:items-start">
+        <p class="text-body-xs text-white/60">&copy; <%= Time.current.year %> <%= current_store.name %>. All rights reserved.</p>
+        <p class="text-body-xs text-white/60">Made by <%= link_to "Ellis Development", "https://ebrookes.dev", target: "_blank", rel: "noopener", class: "text-white/80 underline-offset-2 hover:text-brand-gold-light hover:underline" %></p>
+      </div>
       <ul class="flex flex-wrap justify-center gap-x-5 gap-y-2">
         <li><%= link_to "Privacy", privacy_policy_page_path, class: "text-body-xs text-white/60 hover:text-white" %></li>
         <li><%= link_to "Terms", terms_page_path, class: "text-body-xs text-white/60 hover:text-white" %></li>

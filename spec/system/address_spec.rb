@@ -9,6 +9,9 @@ RSpec.describe 'Address', type: :system do
   let!(:product) { create(:product, name: "Solidus mug set") }
   let!(:order) { create(:order_with_totals, state: 'cart') }
 
+  # These examples cover the state/county field, which the shop turns off.
+  before { stub_spree_preferences(address_requires_state: true) }
+
   before do
     visit products_path
 
@@ -22,7 +25,7 @@ RSpec.describe 'Address', type: :system do
 
   context 'country requires state', js: true do
     let!(:canada) { create(:country, name: 'Canada', states_required: true, iso: 'CA') }
-    let!(:uk) { create(:country, name: 'United Kingdom', states_required: true, iso: 'GB') }
+    let!(:uk) { Spree::Country.find_by!(iso: 'GB').tap { |gb| gb.update!(name: 'United Kingdom', states_required: true) } }
 
     before { stub_spree_preferences(default_country_iso: uk.iso) }
 

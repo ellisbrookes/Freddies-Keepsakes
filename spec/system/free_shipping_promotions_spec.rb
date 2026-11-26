@@ -6,7 +6,7 @@ RSpec.describe 'Free shipping promotions', type: :system, js: true do
   include SolidusStarterFrontend::System::CheckoutHelpers
 
   let!(:store) { create(:store) }
-  let!(:country) { create(:country, name: "United States of America", states_required: true) }
+  let!(:country) { Spree::Country.find_by!(iso: "US").tap { |us| us.update!(name: "United States of America", states_required: true) } }
   let!(:state) { create(:state, name: "Alabama", country: country) }
   let!(:zone) { create(:zone) }
   let!(:shipping_method) do
@@ -39,10 +39,9 @@ RSpec.describe 'Free shipping promotions', type: :system, js: true do
       fill_in "Name", with: "John Smith"
       fill_in 'Street Address:', with: '1 John Street'
       fill_in "City", with: "City of John"
-      fill_in "Zip", with: "01337"
-      select country.name, from: "Country"
-      select state.name, from: "order[bill_address_attributes][state_id]"
-      fill_in "Phone", with: "555-555-5555"
+      fill_in "Postcode", with: "LS1 1AA"
+      select "United Kingdom", from: "Country"
+      fill_in "Phone", with: "0113 496 0000"
 
       # To shipping method screen
       save_and_continue
@@ -53,8 +52,8 @@ RSpec.describe 'Free shipping promotions', type: :system, js: true do
     # Regression test for https://github.com/spree/spree/issues/4428
     it "applies the free shipping promotion" do
       within("#checkout-summary") do
-        expect(page).to have_content("Shipping total: $10.00", normalize_ws: true)
-        expect(page).to have_content("Promotion (Free Shipping): -$10.00", normalize_ws: true)
+        expect(page).to have_content("Shipping total: £10.00", normalize_ws: true)
+        expect(page).to have_content("Promotion (Free Shipping): -£10.00", normalize_ws: true)
       end
     end
   end

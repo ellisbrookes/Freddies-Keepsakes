@@ -1,7 +1,7 @@
 <div class="proposed-shipment">
   <h2 class="proposed-shipment__title font-serif mb-6 text-h5 md:text-h4">
-    <%= t('spree.package_from') %>
-    <%= ship_form.object.stock_location.name %>
+    <%# Everything ships from one place, so don't show the internal stock location name. %>
+    Your items
   </h2>
 
   <%= render "checkouts/steps/delivery_step/shipment_items", shipment_items: ship_form.object.manifest %>

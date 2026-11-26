@@ -7,7 +7,13 @@ Spree.load_defaults "4.7.3"
 Spree.config do |config|
   # Core:
   # Default currency for new sites
-  config.currency = "USD"
+  # The shop sells in the UK: prices in pounds, UK as the default country.
+  config.currency = "GBP"
+  config.default_country_iso = "GB"
+  # Only offer UK delivery addresses at checkout (zone created by db/seeds/uk_store.rb),
+  # and don't ask for a county: UK addresses don't need one.
+  config.checkout_zone = "UK"
+  config.address_requires_state = false
 
   # Uncomment to stop tracking inventory levels in the application
   # config.track_inventory_levels = false

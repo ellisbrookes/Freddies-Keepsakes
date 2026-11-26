@@ -2,7 +2,7 @@
 
 RSpec.shared_context 'checkout setup' do
   let!(:store) { create(:store) }
-  let!(:country) { create(:country, states_required: true) }
+  let!(:country) { Spree::Country.find_by!(iso: "US").tap { |us| us.update!(states_required: true) } }
   let!(:state) { create(:state, country: country) }
   let!(:shipping_method) { create(:shipping_method) }
   let!(:stock_location) { create(:stock_location) }

@@ -20,7 +20,7 @@ RSpec.describe FilterComponent, type: :component do
 
     context 'when a filter list item was checked' do
       let(:search_params) do
-        { price_range_any: [ "Under $10.00" ] }
+        { price_range_any: [ "Under £10.00" ] }
       end
 
       it 'renders as checked' do

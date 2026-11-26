@@ -49,6 +49,8 @@
           <%= render 'shared/search/search_bar', taxons: taxons, taxon: taxon, :locals => { :additional_classes => 'lg:hidden', search_input_id: 'mobile-search-input-area', results_list_id: 'autocomplete-results-mobile' } %>
         </div>
 
+        <%= link_to "Shop", store_path, class: "font-sans-md mb-6 lg:mb-0 lg:mr-8 transition-colors hover:text-accent-600 lg:hover:text-brand-gold-light #{current_page?(store_path) ? 'text-accent-600 lg:text-brand-gold-light' : ''}" %>
+
         <% cache [I18n.locale, categories, taxon] do %>
           <%= render(TaxonsTreeComponent.new(
             root_taxon: categories.root,

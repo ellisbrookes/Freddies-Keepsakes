@@ -28,7 +28,7 @@ class CartLineItemsController < StoreController
       format.html do
         if @order.errors.any?
           flash[:error] = @order.errors.full_messages.join(", ")
-          redirect_back_or_default(root_path)
+          redirect_back_or_default(store_path)
           return
         else
           redirect_to cart_path

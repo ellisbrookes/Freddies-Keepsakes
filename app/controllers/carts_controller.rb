@@ -65,7 +65,7 @@ class CartsController < StoreController
     @order = current_order
     unless @order
       flash[:error] = t('spree.order_not_found')
-      redirect_to(root_path) && return
+      redirect_to(store_path) && return
     end
   end
 

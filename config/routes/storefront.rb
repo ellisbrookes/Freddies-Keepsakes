@@ -1,4 +1,5 @@
-root to: 'home#index'
+root to: 'landing#index'
+get '/store', to: 'home#index', as: :store
 
 devise_for(:user, {
   class_name: 'Spree::User',

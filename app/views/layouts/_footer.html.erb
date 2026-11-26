@@ -1,6 +1,7 @@
 <%
   footer_columns = {
     "Shop" => [
+      ["Shop Home", store_path],
       ["All Products", products_path],
       ["My Account", spree_current_user ? account_path : login_path],
       ["Basket", cart_path],

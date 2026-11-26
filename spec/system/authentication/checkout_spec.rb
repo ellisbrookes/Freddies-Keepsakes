@@ -70,7 +70,7 @@ RSpec.feature 'Checkout', :js, type: :system do
       save_and_continue
       save_and_continue
       check 'Agree to Terms of Service'
-      click_button 'Place Order'
+      click_and_wait_for_page_load "Place Order"
 
       expect(page).to have_text 'Your order has been processed successfully'
     end
@@ -97,7 +97,7 @@ RSpec.feature 'Checkout', :js, type: :system do
       save_and_continue
       save_and_continue
       check 'Agree to Terms of Service'
-      click_button 'Place Order'
+      click_and_wait_for_page_load "Place Order"
 
       expect(page).to have_text 'Your order has been processed successfully'
       expect(Spree::Order.first.user).to eq user
@@ -159,7 +159,7 @@ RSpec.feature 'Checkout', :js, type: :system do
       save_and_continue
       save_and_continue
       check 'Agree to Terms of Service'
-      click_button 'Place Order'
+      click_and_wait_for_page_load "Place Order"
 
       expect(page).to have_text 'Your order has been processed successfully'
       expect(Spree::Order.first.user).to eq Spree::User.find_by(email: 'email@person.com')

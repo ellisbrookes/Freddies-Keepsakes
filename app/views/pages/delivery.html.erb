@@ -1,3 +1,43 @@
 <%= render layout: "pages/page" do %>
-  <%# Add the delivery content here. %>
+  <p>Everything is posted from the UK, to UK addresses. Here's what to expect once you've ordered.</p>
+
+  <h2>Delivery options and prices</h2>
+  <% options = delivery_options %>
+  <% if options.any? %>
+    <div class="not-prose my-6 overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700">
+      <table class="w-full text-left text-body-sm">
+        <tbody>
+          <% options.each do |name, price| %>
+            <tr class="border-b border-gray-200 last:border-0 dark:border-gray-700">
+              <td class="p-4"><%= name %></td>
+              <td class="p-4 text-right font-sans-md whitespace-nowrap"><%= price ? price.to_html : "Shown at checkout" %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <p>Delivery options and prices are shown at checkout.</p>
+  <% end %>
+  <p>You choose your delivery option at checkout, and you'll see the full cost before you pay.</p>
+
+  <h2>How long will my order take?</h2>
+  <p>There are two parts: making your order, then delivering it.</p>
+  <ul>
+    <li><strong>Personalised items</strong> are made especially for you, so please allow <%= fill_in_later("how many working days it takes to make an order, e.g. 3–5") %> for me to make your order before it's posted.</li>
+    <li><strong>Items that aren't personalised</strong> are usually posted within <%= fill_in_later("e.g. 1–2 working days") %>.</li>
+    <li><strong>The delivery time</strong> for the option you chose (above) starts once your order is posted.</li>
+  </ul>
+  <p>Working days are Monday to Friday, not including bank holidays. If you need something by a particular date, please <a href="<%= contact_page_path %>">get in touch</a> before you order and I'll let you know if it's possible.</p>
+
+  <h2>Tracking your parcel</h2>
+  <p>When your order is posted you'll get an email to let you know it's on its way. If you chose tracked delivery, the email includes your tracking number.</p>
+
+  <h2>Do you deliver outside the UK?</h2>
+  <p>Not at the moment, sorry: I only deliver to UK addresses for now.</p>
+
+  <h2>Lost, late or damaged parcels</h2>
+  <p>If your parcel hasn't arrived when you'd expect, or arrives damaged, please <a href="<%= contact_page_path %>">get in touch</a> with your order number and I'll help sort it out. For damaged items, a photo helps. See <a href="<%= returns_page_path %>">returns &amp; refunds</a> for how faulty or damaged items are put right.</p>
+
+  <p>Please double-check your delivery address at checkout. I can't be responsible for parcels sent to an address that was entered incorrectly, but I'll always try to help.</p>
 <% end %>

@@ -1,0 +1,33 @@
+<%# Plain-text "your order is on its way" email. raw() is fine here: plain text isn't rendered as HTML. -%>
+<% scope = "spree.shipment_mailer.shipped_email" -%>
+<%= t("#{scope}.dear_customer") %>
+
+<%= t("#{scope}.instructions") %>
+
+<%= t("#{scope}.shipment_summary") %> - <%= @order.number %>
+--------------------------------------------------
+<% @manifest.each do |item| -%>
+<%= raw(item.variant.product.name) %>
+<% if item.variant.options_text.present? -%>
+  <%= raw(item.variant.options_text) %>
+<% end -%>
+<% if item.line_item&.personalisation.present? -%>
+  Personalisation: "<%= raw(item.line_item.personalisation) %>"
+<% end -%>
+  Quantity: <%= item.quantity %>
+
+<% end -%>
+--------------------------------------------------
+<% if @carton.tracking.present? -%>
+<%= t("#{scope}.track_information", tracking: @carton.tracking) %>
+<% end -%>
+<% if @carton.tracking_url.present? -%>
+Track your parcel: <%= @carton.tracking_url %>
+<% end -%>
+
+<%= t("#{scope}.thanks") %>
+
+--
+Freddies Personalised Boutique
+Shop: <%= main_app.store_url %>
+Contact: <%= main_app.contact_page_url %>

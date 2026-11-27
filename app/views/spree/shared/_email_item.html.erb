@@ -1,0 +1,23 @@
+<%#
+  One item row in a shop email. Locals: product_name, options_text, personalisation,
+  detail (e.g. "1 × £24.00"), amount (optional, shown on the right).
+  Customer text uses plain (escaped) output.
+%>
+<% text = "font-family:Arial,sans-serif;font-size:15px;line-height:22px;color:#28313B;" %>
+<% muted = "font-family:Arial,sans-serif;font-size:13px;line-height:19px;color:#616161;" %>
+<% cell = "padding:12px 0;border-bottom:1px solid #E4E8EB;vertical-align:top;" %>
+<tr>
+  <td style="<%= cell %>">
+    <div style="<%= text %>font-weight:bold;"><%= product_name %></div>
+    <% if options_text.present? %>
+      <div style="<%= muted %>"><%= options_text %></div>
+    <% end %>
+    <% if personalisation.present? %>
+      <div style="<%= muted %>color:#17748A;">Personalisation: “<%= personalisation %>”</div>
+    <% end %>
+    <% if local_assigns[:detail].present? %>
+      <div style="<%= muted %>"><%= detail %></div>
+    <% end %>
+  </td>
+  <td style="<%= cell %><%= text %>text-align:right;white-space:nowrap;padding-left:12px;"><%= local_assigns[:amount] %></td>
+</tr>

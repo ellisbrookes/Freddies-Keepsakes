@@ -1,0 +1,31 @@
+<%# Plain-text order cancellation email. raw() is fine here: plain text isn't rendered as HTML. -%>
+<%= t('.dear_customer') %>
+
+<%= t('.instructions') %>
+
+<%= t('.order_summary_canceled') %> - <%= @order.number %>
+--------------------------------------------------
+<% @order.line_items.each do |item| -%>
+<%= raw(item.variant.product.name) %>
+<% if item.variant.options_text.present? -%>
+  <%= raw(item.variant.options_text) %>
+<% end -%>
+<% if item.personalisation.present? -%>
+  Personalisation: "<%= raw(item.personalisation) %>"
+<% end -%>
+  <%= item.quantity %> x <%= item.single_money %> = <%= item.display_amount %>
+
+<% end -%>
+--------------------------------------------------
+<%= t('.subtotal') %> <%= @order.display_item_total %>
+<% @order.adjustments.each do |adjustment| -%>
+<%= raw(adjustment.label) %>: <%= adjustment.display_amount %>
+<% end -%>
+<%= t('.total') %> <%= @order.display_total %>
+
+<%= t('.thanks') %>
+
+--
+Freddies Personalised Boutique
+Shop: <%= main_app.store_url %>
+Contact: <%= main_app.contact_page_url %>

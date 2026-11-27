@@ -1,41 +1,45 @@
+<%# Plain-text order confirmation (shown by email apps that don't display HTML). raw() is fine here: plain text isn't rendered as HTML. -%>
 <%= t('.dear_customer') %>
 
 <%= t('.instructions') %>
 
-============================================================
-<%= t('.order_summary') %>
-============================================================
-<% @order.line_items.each do |item| %>
-  <%= item.variant.sku %> <%= raw(item.variant.product.name) %> <%= raw(item.variant.options_text) -%> (<%=item.quantity%>) @ <%= item.single_money %> = <%= item.display_amount %>
-<% if item.personalisation.present? %>
-    Personalisation: "<%= raw(item.personalisation) %>"
-<% end %>
-<% end %>
-============================================================
+<%= t('.order_summary') %> - <%= @order.number %>
+--------------------------------------------------
+<% @order.line_items.each do |item| -%>
+<%= raw(item.variant.product.name) %>
+<% if item.variant.options_text.present? -%>
+  <%= raw(item.variant.options_text) %>
+<% end -%>
+<% if item.personalisation.present? -%>
+  Personalisation: "<%= raw(item.personalisation) %>"
+<% end -%>
+  <%= item.quantity %> x <%= item.single_money %> = <%= item.display_amount %>
+
+<% end -%>
+--------------------------------------------------
 <%= t('.subtotal') %> <%= @order.display_item_total %>
-<% if @order.line_item_adjustments.exists? %>
-  <% if @order.all_adjustments.promotion.exists? %>
-    <% @order.all_adjustments.promotion.group_by(&:label).each do |label, adjustments| %>
-<%= t('spree.promotion') %>: <%= label %> <%= Spree::Money.new(adjustments.sum(&:amount), currency: @order.currency) %>
-    <% end %>
-  <% end %>
-<% end %>
-
-<% @order.shipments.group_by { |s| s.selected_shipping_rate.try(:name) }.each do |name, shipments| %>
-<%= t('spree.shipping') %>: <%= name %> <%= Spree::Money.new(shipments.sum(&:total_before_tax), currency: @order.currency) %>
-<% end %>
-
-<% if @order.all_adjustments.tax.exists? %>
-  <% @order.all_adjustments.tax.group_by(&:label).each do |label, adjustments| %>
-<%= t('spree.tax') %>: <%= label %> <%= Spree::Money.new(adjustments.sum(&:amount), currency: @order.currency) %>
-  <% end %>
-<% end %>
-
-<% @order.adjustments.each do |adjustment| %>
-  <% next if (adjustment.source_type == 'Spree::TaxRate') and (adjustment.amount == 0) %>
-<%= adjustment.label %> <%= adjustment.display_amount %>
-<% end %>
-============================================================
+<% if @order.line_item_adjustments.exists? && @order.all_adjustments.promotion.exists? -%>
+<% @order.all_adjustments.promotion.group_by(&:label).each do |label, adjustments| -%>
+<%= t('spree.promotion') %> <%= raw(label) %>: <%= Spree::Money.new(adjustments.sum(&:amount), currency: @order.currency) %>
+<% end -%>
+<% end -%>
+<% @order.shipments.group_by { |s| s.selected_shipping_rate.try(:name) }.each do |name, shipments| -%>
+<%= t('spree.shipping') %>: <%= raw(name) %> <%= Spree::Money.new(shipments.sum(&:total_before_tax), currency: @order.currency) %>
+<% end -%>
+<% if @order.all_adjustments.tax.exists? -%>
+<% @order.all_adjustments.tax.group_by(&:label).each do |label, adjustments| -%>
+<%= t('spree.tax') %> <%= raw(label) %>: <%= Spree::Money.new(adjustments.sum(&:amount), currency: @order.currency) %>
+<% end -%>
+<% end -%>
+<% @order.adjustments.each do |adjustment| -%>
+<% next if (adjustment.source_type == 'Spree::TaxRate') and (adjustment.amount == 0) -%>
+<%= raw(adjustment.label) %>: <%= adjustment.display_amount %>
+<% end -%>
 <%= t('.total') %> <%= @order.display_total %>
 
 <%= t('.thanks') %>
+
+--
+Freddies Personalised Boutique
+Shop: <%= main_app.store_url %>
+Contact: <%= main_app.contact_page_url %>

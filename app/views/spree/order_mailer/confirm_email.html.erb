@@ -1,87 +1,59 @@
-<table>
+<%#
+  Order confirmation email. Based on solidus_core's template, restyled for the shop
+  and showing each item's personalisation. Customer text uses plain (escaped) output.
+%>
+<%
+  text = "font-family:Arial,sans-serif;font-size:15px;line-height:22px;color:#28313B;"
+  muted = "font-family:Arial,sans-serif;font-size:13px;line-height:19px;color:#616161;"
+  amount = "#{text}text-align:right;white-space:nowrap;padding-left:12px;"
+  summary_row = lambda do |label, value, bold: false|
+    weight = bold ? "font-weight:bold;" : ""
+    %(<tr><td style="#{text}#{weight}padding:4px 0;">#{ERB::Util.html_escape(label)}</td><td style="#{amount}#{weight}padding:4px 0 4px 12px;">#{ERB::Util.html_escape(value)}</td></tr>).html_safe
+  end
+%>
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation">
   <tr>
-    <td>
-      <p class="lede">
-        <%= t('.dear_customer') %>
+    <td style="padding:8px 0 0;">
+      <p style="<%= text %>font-size:18px;margin:0 0 12px;"><%= t('.dear_customer') %></p>
+      <p style="<%= text %>margin:0 0 20px;"><%= t('.instructions') %></p>
+
+      <p style="<%= text %>font-size:17px;font-weight:bold;color:#465361;margin:0 0 4px;">
+        <%= t('.order_summary') %> &middot; <%= @order.number %>
       </p>
-      <p>
-        <%= t('.instructions') %>
-      </p>
-      <p>
-        <%= t('.order_summary') %>
-      </p>
-      <table>
+
+      <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="border-top:2px solid #465361;">
         <% @order.line_items.each do |item| %>
-          <tr>
-            <td><%= item.variant.sku %></td>
-            <td>
-              <%= item.variant.product.name %>
-              <%= item.variant.options_text -%>
-              <% if item.personalisation.present? %>
-                <br>Personalisation: “<%= item.personalisation %>”
-              <% end %>
-            </td>
-            <td>(<%=item.quantity%>) @ <%= item.single_money %> = <%= item.display_amount %></td>
-          </tr>
+          <%= render "spree/shared/email_item",
+                product_name: item.variant.product.name, options_text: item.variant.options_text,
+                personalisation: item.personalisation,
+                detail: "#{item.quantity} × #{item.single_money}", amount: item.display_amount %>
         <% end %>
-        <tr>
-          <td></td>
-          <td>
-            <%= t('.subtotal') %>
-          </td>
-          <td>
-            <%= @order.display_item_total %>
-          </td>
-        </tr>
-        <% if @order.line_item_adjustments.exists? %>
-          <% if @order.all_adjustments.promotion.exists? %>
-            <% @order.all_adjustments.promotion.group_by(&:label).each do |label, adjustments| %>
-              <tr>
-                <td></td>
-                <td><%= t('spree.promotion') %> <%= label %>:</td>
-                <td><%= Spree::Money.new(adjustments.sum(&:amount), currency: @order.currency) %></td>
-              </tr>
-            <% end %>
+      </table>
+
+      <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin-top:8px;">
+        <%= summary_row.call(t('.subtotal'), @order.display_item_total.to_s) %>
+        <% if @order.line_item_adjustments.exists? && @order.all_adjustments.promotion.exists? %>
+          <% @order.all_adjustments.promotion.group_by(&:label).each do |label, adjustments| %>
+            <%= summary_row.call("#{t('spree.promotion')} #{label}", Spree::Money.new(adjustments.sum(&:amount), currency: @order.currency).to_s) %>
           <% end %>
         <% end %>
         <% @order.shipments.group_by { |s| s.selected_shipping_rate.try(:name) }.each do |name, shipments| %>
-          <tr>
-            <td></td>
-            <td><%= t('spree.shipping') %> <%= name %>:</td>
-            <td><%= Spree::Money.new(shipments.sum(&:total_before_tax), currency: @order.currency) %></td>
-          </tr>
+          <%= summary_row.call("#{t('spree.shipping')}: #{name}", Spree::Money.new(shipments.sum(&:total_before_tax), currency: @order.currency).to_s) %>
         <% end %>
         <% if @order.all_adjustments.tax.exists? %>
           <% @order.all_adjustments.tax.group_by(&:label).each do |label, adjustments| %>
-            <tr>
-              <td></td>
-              <td><%= t('spree.tax') %> <%= label %>:</td>
-              <td><%= Spree::Money.new(adjustments.sum(&:amount), currency: @order.currency) %></td>
-            </tr>
+            <%= summary_row.call("#{t('spree.tax')} #{label}", Spree::Money.new(adjustments.sum(&:amount), currency: @order.currency).to_s) %>
           <% end %>
         <% end %>
         <% @order.adjustments.each do |adjustment| %>
           <% next if (adjustment.source_type == 'Spree::TaxRate') and (adjustment.amount == 0) %>
-          <tr>
-            <td></td>
-            <td><%= adjustment.label %>:</td>
-            <td><%= adjustment.display_amount %></td>
-          </tr>
+          <%= summary_row.call(adjustment.label, adjustment.display_amount.to_s) %>
         <% end %>
-        <tr>
-          <td></td>
-          <td>
-            <%= t('.total') %>
-          </td>
-          <td>
-            <%= @order.display_total %>
-          </td>
-        </tr>
+        <tr><td colspan="2" style="border-top:1px solid #465361;font-size:0;line-height:0;padding:4px 0 0;">&nbsp;</td></tr>
+        <%= summary_row.call(t('.total'), @order.display_total.to_s, bold: true) %>
       </table>
-      <p>
-        <%= t('.thanks') %>
-      </p>
+
+      <p style="<%= text %>margin:24px 0 0;"><%= t('.thanks') %></p>
     </td>
-    <td class="expander"></td>
   </tr>
 </table>

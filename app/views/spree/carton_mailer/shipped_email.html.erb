@@ -1,0 +1,34 @@
+<%# "Your order is on its way" email, restyled for the shop. Based on solidus_core's template. %>
+<% text = "font-family:Arial,sans-serif;font-size:15px;line-height:22px;color:#28313B;" %>
+<% scope = "spree.shipment_mailer.shipped_email" %>
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+  <tr>
+    <td style="padding:8px 0 0;">
+      <p style="<%= text %>font-size:18px;margin:0 0 12px;"><%= t("#{scope}.dear_customer") %></p>
+      <p style="<%= text %>margin:0 0 20px;"><%= t("#{scope}.instructions") %></p>
+
+      <p style="<%= text %>font-size:17px;font-weight:bold;color:#465361;margin:0 0 4px;">
+        <%= t("#{scope}.shipment_summary") %> &middot; <%= @order.number %>
+      </p>
+      <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="border-top:2px solid #465361;">
+        <% @manifest.each do |item| %>
+          <%= render "spree/shared/email_item",
+                product_name: item.variant.product.name, options_text: item.variant.options_text,
+                personalisation: item.line_item&.personalisation,
+                detail: "Quantity: #{item.quantity}" %>
+        <% end %>
+      </table>
+
+      <% if @carton.tracking.present? %>
+        <p style="<%= text %>margin:20px 0 0;"><%= t("#{scope}.track_information", tracking: @carton.tracking) %></p>
+      <% end %>
+      <% if @carton.tracking_url.present? %>
+        <p style="<%= text %>margin:8px 0 0;">
+          <a href="<%= @carton.tracking_url %>" style="color:#17748A;text-decoration:underline;">Track your parcel</a>
+        </p>
+      <% end %>
+
+      <p style="<%= text %>margin:24px 0 0;"><%= t("#{scope}.thanks") %></p>
+    </td>
+  </tr>
+</table>

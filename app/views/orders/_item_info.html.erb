@@ -24,6 +24,8 @@
     <%= variant.options_text %>
   </p>
 
+  <%= render "shared/personalisation", line_item: line_item %>
+
   <% if stock_info && line_item.insufficient_stock? %>
     <p class="<%= base_class %>__stock font-sans text-body-sm">
       <%= t('spree.out_of_stock') %>

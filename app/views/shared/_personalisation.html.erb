@@ -1,0 +1,7 @@
+<%# The customer's personalisation for a line item, if it has one. It's customer text, so always output it escaped. %>
+<% if line_item&.personalisation.present? %>
+  <p class="personalisation text-body-sm <%= local_assigns[:classes] %>">
+    <span class="font-sans-md">Personalisation:</span>
+    <span class="personalisation__text">“<%= line_item.personalisation %>”</span>
+  </p>
+<% end %>

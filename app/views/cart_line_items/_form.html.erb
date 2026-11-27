@@ -19,6 +19,21 @@
 
   <%= render 'cart_line_items/product_variants', product: product %>
 
+  <% if (prompt = Personalisation.prompt_for(product)) %>
+    <div class="text-input mb-8">
+      <%= label_tag :personalisation, "#{prompt}:" %>
+      <%= text_field_tag :personalisation, nil,
+        required: true,
+        maxlength: Personalisation::MAX_LENGTH,
+        autocomplete: "off",
+        placeholder: "e.g. Freddie",
+        "aria-describedby": "personalisation-help" %>
+      <p id="personalisation-help" class="mt-2 text-body-xs text-gray-500 dark:text-gray-400">
+        Up to <%= Personalisation::MAX_LENGTH %> characters. Please check spelling: we'll make it exactly as you type it.
+      </p>
+    </div>
+  <% end %>
+
   <% if product.price %>
     <%= render 'cart_line_items/product_submit', product: product %>
   <% else %>

@@ -14,6 +14,7 @@
         <div class="shipment-items__price">
           <%= display_price(shipment_item.variant) %> <%= "(× #{shipment_item.quantity})" %>
         </div>
+        <%= render "shared/personalisation", line_item: shipment_item.line_item %>
       </div>
     </li>
   <% end %>

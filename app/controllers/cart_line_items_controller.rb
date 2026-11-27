@@ -14,11 +14,18 @@ class CartLineItemsController < StoreController
     quantity = params[:quantity].present? ? params[:quantity].to_i : 1
 
     # 2,147,483,647 is crazy. See issue https://github.com/spree/spree/issues/2695.
+    personalisation = Personalisation.normalise(params[:personalisation])
+
     if !quantity.between?(1, 2_147_483_647)
       @order.errors.add(:base, t("spree.please_enter_reasonable_quantity"))
+    elsif Personalisation.personalisable?(variant.product) && personalisation.nil?
+      @order.errors.add(:base, "Please fill in your personalisation (#{Personalisation.prompt_for(variant.product)})")
     else
+      # Only personalisable products take personalisation; ignore it for anything else.
+      options = Personalisation.personalisable?(variant.product) ? { personalisation: personalisation } : {}
+
       begin
-        @line_item = @order.contents.add(variant, quantity)
+        @line_item = @order.contents.add(variant, quantity, options)
       rescue ActiveRecord::RecordInvalid => error
         @order.errors.add(:base, error.record.errors.full_messages.join(", "))
       end

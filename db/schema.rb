@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_26_143407) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_26_234856) do
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
     t.string "message_id", null: false
@@ -255,6 +255,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_26_143407) do
     t.decimal "included_tax_total", precision: 10, scale: 2, default: "0.0", null: false
     t.json "customer_metadata"
     t.json "admin_metadata"
+    t.text "personalisation"
     t.index ["order_id"], name: "index_spree_line_items_on_order_id"
     t.index ["variant_id"], name: "index_spree_line_items_on_variant_id"
   end

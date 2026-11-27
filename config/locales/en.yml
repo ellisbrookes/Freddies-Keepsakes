@@ -3,3 +3,20 @@ en:
     # UK wording for address fields.
     zip: "Postcode"
     zipcode: "Postcode"
+    order_mailer:
+      confirm_email:
+        dear_customer: "Hi there,"
+        instructions: "Thank you so much for your order! I've got it and will start making it soon. Here's a summary for your records."
+        thanks: "Thank you for supporting my little business. It genuinely means the world to me. Lots of love, the face behind Freddies Personalised Boutique ❤️"
+      cancel_email:
+        dear_customer: "Hi there,"
+        instructions: "Your order has been cancelled. Here are the details for your records. If you didn't expect this, please get in touch and I'll be happy to help."
+        order_summary_canceled: "Cancelled order"
+        thanks: "Thank you, and I hope to make something lovely for you another time. The face behind Freddies Personalised Boutique ❤️"
+    shipment_mailer:
+      shipped_email:
+        dear_customer: "Hi there,"
+        instructions: "Good news: your order is on its way to you!"
+        shipment_summary: "What's in your parcel"
+        thanks: "I really hope you love it. Thank you so much for supporting my little business. Lots of love, the face behind Freddies Personalised Boutique ❤️"
+        track_information: "Tracking number: %{tracking}"

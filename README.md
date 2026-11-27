@@ -22,4 +22,4 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
-# Freddies-Personalised-Boutique
+# Freddies Keepsakes

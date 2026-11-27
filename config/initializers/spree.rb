@@ -40,7 +40,7 @@ Spree.config do |config|
   # Admin:
 
   # Brand logos (storefront + legacy admin)
-  config.logo = "logo.png"
+  config.logo = "logo_keepsakes.png"
   config.admin_interface_logo = "logo_mark.png"
 
   # Payment gateway credentials can be configured statically here and referenced from

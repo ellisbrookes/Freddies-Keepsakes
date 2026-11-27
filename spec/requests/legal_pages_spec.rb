@@ -12,7 +12,7 @@ RSpec.describe "Legal pages", type: :request do
   {
     "/returns" => [ "can't be returned just because you've changed your mind", "within 14 days of receiving it", "30 days" ],
     "/privacy-policy" => [ "data controller", "Information Commissioner's Office", "I'll never sell your information" ],
-    "/cookie-policy" => [ "_freddies_personalised_boutique_session", "guest_token", "remember_spree_user_token" ],
+    "/cookie-policy" => [ "_freddies_keepsakes_session", "guest_token", "remember_spree_user_token" ],
     "/terms" => [ "Please check your personalisation carefully", "UK addresses only", "Consumer Rights Act 2015" ]
   }.each do |path, phrases|
     it "#{path} has its content" do

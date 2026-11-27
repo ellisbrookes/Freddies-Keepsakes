@@ -18,7 +18,7 @@ RSpec.describe 'Error pages', type: :request do
 
         it 'is branded with the logo' do
           expect(html).to include('src="/error-logo.png"')
-          expect(html).to include('alt="Freddies Personalised Boutique"')
+          expect(html).to include('alt="Freddies Keepsakes"')
         end
 
         it 'shows a friendly title' do

@@ -5,7 +5,7 @@
     <%= form_for @order,
       url: checkout_guest_session_path,
       method: :post,
-      html: { class: "space-y-6", id: "checkout_form_registration" } do |f|
+      html: { class: "mt-6 space-y-6", id: "checkout_form_registration" } do |f|
     %>
 
       <div class="text-input">
@@ -20,7 +20,7 @@
         %>
       </div>
 
-      <div class="mt-12 text-center">
+      <div class="text-center">
         <%= I18n.t("spree.or") %> <%= link_to I18n.t("spree.create_a_new_account"), signup_path, class:"transition-all duration-300 text-black hover:!text-accent-600 dark:text-sand underline" %>
       </div>
 

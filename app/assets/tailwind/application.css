@@ -1,6 +1,37 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+/* Keep using the Tailwind 3 JS theme (colours, fonts, sizes, breakpoints). */
+@config "../../../config/tailwind.config.js";
+@plugin "@tailwindcss/forms";
+@plugin "@tailwindcss/aspect-ratio";
+@plugin "@tailwindcss/typography";
+
+/* Dark mode follows the theme switcher's .dark class, not the OS setting. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  Tailwind 3 base styles that Tailwind 4 changed (from the official upgrade guide):
+  grey default border colour, grey placeholders and a pointer cursor on buttons.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: theme(colors.gray.200);
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: theme(colors.gray.400);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
 
 @layer base {
   html,
@@ -8,6 +39,12 @@
     @apply box-border max-w-full antialiased scroll-smooth bg-sand;
     @apply dark:bg-black dark:text-sand;
   }
+}
+
+/* A utility (not a component) so responsive prefixes like lg:grid-container work. */
+@utility grid-container {
+  @apply grid grid-cols-4 gap-4;
+  @apply md:grid-cols-12 md:gap-7;
 }
 
 @layer components {
@@ -19,11 +56,6 @@
   .wrapper-mobile-fullwidth {
     @apply my-0 mx-auto py-0 px-0;
     @apply lg:px-[30px] md:max-w-screen-2xl 2xl:px-0;
-  }
-
-  .grid-container {
-    @apply grid grid-cols-4 gap-4;
-    @apply md:grid-cols-12 md:gap-7;
   }
 
   .button-primary {
@@ -40,8 +72,8 @@
 
   /* Inputs */
   .text-input input {
-    @apply relative flex items-center justify-start border border-gray-mid rounded px-4 py-3 placeholder:text-gray-500 text-black w-full;
-    @apply hover:border-gray-400 focus:outline-none focus:ring focus:ring-offset-1 focus:ring-black/20 focus:border-gray-400;
+    @apply relative flex items-center justify-start border border-gray-mid rounded-sm px-4 py-3 placeholder:text-gray-500 text-black w-full;
+    @apply hover:border-gray-400 focus:outline-hidden focus:ring-3 focus:ring-offset-1 focus:ring-black/20 focus:border-gray-400;
     @apply dark:bg-gray-800 dark:border-gray-600 dark:text-sand dark:placeholder:text-gray-400 dark:focus:ring-white/30;
   }
 
@@ -54,8 +86,8 @@
   }
 
   .select-input select {
-    @apply border-gray-mid rounded px-4 py-3 w-full cursor-pointer text-black;
-    @apply hover:border-gray-400 focus:outline-none focus:ring focus:ring-black/20 focus:border-gray-400;
+    @apply border-gray-mid rounded-sm px-4 py-3 w-full cursor-pointer text-black;
+    @apply hover:border-gray-400 focus:outline-hidden focus:ring-3 focus:ring-black/20 focus:border-gray-400;
     @apply dark:bg-gray-800 dark:border-gray-600 dark:text-sand dark:placeholder:text-gray-400;
   }
 
@@ -64,7 +96,7 @@
   }
   
   input[type=checkbox] {
-    @apply text-black rounded dark:checked:invert;
+    @apply text-black rounded-sm dark:checked:invert;
   }
 
   [type=radio] {
@@ -86,12 +118,12 @@
     @apply relative flex items-center w-14 h-7 py-0.5 px-2 rounded-full border border-black bg-black;
     @apply after:bg-sand after:content-[''] after:rounded-full after:h-[22px] after:w-[22px] after:transition-all after:translate-x-[120%];
     @apply dark:bg-sand;
-    @apply peer-focus:outline-none;
+    @apply peer-focus:outline-hidden;
   }
 
   /* Flash Messages */
   .flash {
-    @apply rounded p-3 text-center text-body-sm w-fit h-fit mx-auto md:text-body md:p-4;
+    @apply rounded-sm p-3 text-center text-body-sm w-fit h-fit mx-auto md:text-body md:p-4;
     @apply mx-[25px] 2xl:mx-auto;
   }
 

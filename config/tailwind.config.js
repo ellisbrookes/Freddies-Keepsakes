@@ -1,5 +1,4 @@
 module.exports = {
-  darkMode: 'class',
   content: [
     './public/*.html',
     './app/helpers/**/*.rb',
@@ -113,7 +112,7 @@ module.exports = {
       },
       width: {
         '1_col-3': '32%',
-        'collection-card': 'calc(33%-12px)' // assumes 3 cards shown with space-x-6 (24px) in between.
+        'collection-card': 'calc(33% - 12px)' // assumes 3 cards shown with space-x-6 (24px) in between.
       },
       height: {
         '1_col-3': '32%',
@@ -123,9 +122,6 @@ module.exports = {
       }
     }
   },
-  plugins: [
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/aspect-ratio'),
-    require('@tailwindcss/typography')
-  ]
+  // Plugins are loaded with @plugin in app/assets/tailwind/application.css:
+  // Tailwind 4's standalone CLI can't require() them from a JS config.
 }

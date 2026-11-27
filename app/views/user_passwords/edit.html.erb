@@ -4,7 +4,7 @@
 
     <%= render 'shared/error_messages', target: @spree_user %>
 
-    <%= form_for @spree_user, as: :spree_user, url: update_password_path, method: :put, html: { class: "space-y-6 mb-12" } do |f| %>
+    <%= form_for @spree_user, as: :spree_user, url: update_password_path, method: :put, html: { class: "mt-6 space-y-6 mb-12" } do |f| %>
       <div class="text-input">
         <%= f.label :password, "#{t("spree.password")}:" %>
         <%= f.password_field :password, placeholder: "p455w0rd" %>
@@ -24,7 +24,7 @@
 
       <%= f.hidden_field :reset_password_token %>
 
-      <div class="mt-12 text-center">
+      <div class="text-center">
         <%= I18n.t("spree.or") %> <%= link_to I18n.t("spree.create_a_new_account"), signup_path, class:"transition-all duration-300 text-black hover:!text-accent-600 dark:text-sand underline" %>
       </div>
 

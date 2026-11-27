@@ -1,6 +1,9 @@
-<div class="relative flex items-center" data-controller="top-bar">
-  <div class="flex items-center gap-x-6">
-    <%= render 'shared/search/search_bar', taxons: taxons, taxon: taxon, :locals => { :additional_classes => 'hidden lg:flex' } %>
+<div class="relative flex items-center shrink-0 lg:shrink" data-controller="top-bar">
+  <div class="flex items-center gap-x-4 min-[360px]:gap-x-5 lg:gap-x-6">
+    <%# Hidden as a whole on phones (search lives in the menu drawer there), so it takes no gap. %>
+    <div class="hidden lg:block">
+      <%= render 'shared/search/search_bar', taxons: taxons, taxon: taxon, :locals => { :additional_classes => 'hidden lg:flex' } %>
+    </div>
     <div class="hidden lg:flex">
       <%= render "shared/navigation/theme_switcher" %>
     </div>

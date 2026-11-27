@@ -14,6 +14,10 @@ function selectFirstVariant() {
 }
 
 function onSelection(event) {
+  // Clicking a label fires once for the label and again for its radio input;
+  // only the input carries the option data, so ignore the label's click.
+  if (!event.target.matches("input[data-option-index]")) return;
+
   document.getElementById(`selected-${event.target.name}`).innerText = event.target.dataset.presentation;
 
   const optionIndex = event.target.attributes["data-option-index"].value;

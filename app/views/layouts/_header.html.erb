@@ -1,7 +1,7 @@
 <div class="bg-gradient-to-tr from-brand-slate-dark via-brand-slate to-[#677582] text-white shadow-xs">
 <header class="wrapper grid-container w-full py-3 px-5 lg:px-6 2xl:px-0">
-  <div class="col-span-full flex items-center justify-center min-h-[64px] lg:justify-between lg:gap-x-6">
-    <div class="flex items-center justify-center w-8 h-8 lg:py-2 lg:hidden">
+  <div class="col-span-full flex items-center justify-between gap-x-2 min-[360px]:gap-x-3 min-h-[64px] lg:gap-x-6">
+    <div class="flex items-center justify-center w-8 h-8 shrink-0 lg:py-2 lg:hidden">
       <button type="button" class="inline-flex flex-col gap-y-2 items-center p-2 w-10 h-10 justify-center rounded-lg focus:outline-hidden focus:ring-2 focus:ring-gray-500" aria-controls="navbar-default" aria-expanded="false" data-action="click->drawer#toggle">
         <span class="sr-only">Open main menu</span>
         <svg class="bg-white" xmlns="http://www.w3.org/2000/svg" width="26" height="2" viewBox="0 0 26 2" fill="currentColor">
@@ -12,12 +12,12 @@
         </svg>
       </button>
     </div>
-    <div class="flex items-center gap-x-4 xl:gap-x-8 w-full justify-center lg:justify-start">
-      <%= link_to root_path, class: 'absolute lg:relative left-1/2 lg:left-0 lg:-translate-x-0 -translate-x-1/2 flex items-center gap-x-2 lg:gap-x-3 shrink-0', title: current_store.name do %>
-        <%= image_tag "logo_mark.png", alt: "", class: "h-10 w-10 lg:h-14 lg:w-14" %>
+    <div class="flex items-center gap-x-4 xl:gap-x-8 min-w-0 flex-1 justify-start lg:flex-initial lg:w-full lg:min-w-auto">
+      <%= link_to root_path, class: 'flex items-center gap-x-2 lg:gap-x-3 shrink-0', title: current_store.name do %>
+        <%= image_tag "logo_mark.png", alt: "", class: "h-8 w-8 min-[360px]:h-9 min-[360px]:w-9 sm:h-10 sm:w-10 lg:h-14 lg:w-14" %>
         <span class="flex flex-col leading-none">
-          <span class="uppercase font-sans-md whitespace-nowrap text-[0.5rem] lg:text-[0.65rem] tracking-[0.14em] lg:tracking-[0.18em] text-white/85">Freddies Personalised</span>
-          <span class="uppercase font-serif-md text-body-md lg:text-body-22 tracking-[0.28em] lg:tracking-[0.32em] text-brand-gold mt-1">Boutique</span>
+          <span class="uppercase font-sans-md whitespace-nowrap text-[0.45rem] sm:text-[0.5rem] lg:text-[0.65rem] tracking-[0.12em] sm:tracking-[0.14em] lg:tracking-[0.18em] text-white/85">Freddies Personalised</span>
+          <span class="uppercase font-serif-md text-body sm:text-body-md lg:text-body-22 tracking-[0.14em] min-[360px]:tracking-[0.22em] sm:tracking-[0.28em] lg:tracking-[0.32em] text-brand-gold mt-1">Boutique</span>
         </span>
       <% end %>
 
@@ -49,7 +49,7 @@
           <%= render 'shared/search/search_bar', taxons: taxons, taxon: taxon, :locals => { :additional_classes => 'lg:hidden', search_input_id: 'mobile-search-input-area', results_list_id: 'autocomplete-results-mobile' } %>
         </div>
 
-        <%= link_to "Shop", store_path, class: "font-sans-md mb-6 lg:mb-0 lg:mr-8 transition-colors hover:text-accent-600 lg:hover:text-brand-gold-light #{current_page?(store_path) ? 'text-accent-600 lg:text-brand-gold-light' : ''}" %>
+        <%= link_to "Shop", store_path, class: "font-sans-md font-medium text-body mb-8 lg:mb-0 lg:mr-4 xl:mr-6 transition-colors hover:text-accent-600 lg:hover:text-brand-gold-light #{current_page?(store_path) ? 'text-accent-600 lg:text-brand-gold-light' : ''}" %>
 
         <% cache [I18n.locale, categories, taxon] do %>
           <%= render(TaxonsTreeComponent.new(
@@ -61,11 +61,18 @@
             )) if categories %>
         <% end %>
 
-        <div class="lg:hidden mt-auto">
-        <div class="flex justify-between">
-          <%= render "shared/navigation/theme_switcher" %>
-
-        </div>
+        <div class="lg:hidden mt-auto pt-10">
+          <% drawer_link_class = "block py-1 text-gray-700 transition-colors hover:text-accent-600 dark:text-gray-200" %>
+          <%# Plain links, not a <ul>: ".categories-menu ul" styles every list in the drawer. %>
+          <div class="flex flex-col gap-y-3 border-t border-gray-200 pt-6 mb-8 text-body-sm dark:border-gray-700">
+            <%= link_to "Home", root_path, class: drawer_link_class %>
+            <%= link_to (spree_current_user ? "My account" : "Sign in"), (spree_current_user ? account_path : login_path), class: drawer_link_class %>
+            <%= link_to "Basket", cart_path, class: drawer_link_class %>
+            <%= link_to "Contact us", contact_page_path, class: drawer_link_class %>
+          </div>
+          <div class="flex justify-between">
+            <%= render "shared/navigation/theme_switcher" %>
+          </div>
         </div>
       </nav>
     </div>

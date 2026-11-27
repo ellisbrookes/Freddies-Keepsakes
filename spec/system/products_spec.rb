@@ -14,7 +14,7 @@ RSpec.describe 'Visiting Products', type: :system do
 
   it 'redirects to cart after adding a product to it' do
     click_link 'Solidus tote'
-    expect(page).to have_content('$19.99')
+    expect(page).to have_content('£19.99')
 
     add_to_cart
     expect(page).to have_content('Shopping Cart')
@@ -86,10 +86,10 @@ RSpec.describe 'Visiting Products', type: :system do
 
     it 'has correct schema.org/Offer attributes' do
       expect(page).to have_css("#product_#{product.id} [itemprop='price'][content='19.99']")
-      expect(page).to have_css("#product_#{product.id} [itemprop='priceCurrency'][content='USD']")
+      expect(page).to have_css("#product_#{product.id} [itemprop='priceCurrency'][content='GBP']")
       click_link product.name
       expect(page).to have_css("[itemprop='price'][content='19.99']")
-      expect(page).to have_css("[itemprop='priceCurrency'][content='USD']")
+      expect(page).to have_css("[itemprop='priceCurrency'][content='GBP']")
     end
   end
 
@@ -193,7 +193,8 @@ RSpec.describe 'Visiting Products', type: :system do
   it 'hides products without price' do
     expect(page.all('ul.products-grid li').size).to eq(12)
     stub_spree_preferences(show_products_without_price: false)
-    stub_spree_preferences(currency: 'GBP')
+    # Products are priced in the shop's currency (GBP); none have a EUR price.
+    stub_spree_preferences(currency: 'EUR')
     visit products_path
     expect(page.all('ul.products-grid li').size).to eq(0)
   end

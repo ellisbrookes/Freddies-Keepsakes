@@ -40,7 +40,7 @@ RSpec.describe 'Quantity Promotions', type: :system, js: true do
     click_button "Apply Code"
     expect(page).to have_content("The coupon code was successfully applied to your order")
     within("#cart_adjustments") do
-      expect(page).to have_content("-$10.00")
+      expect(page).to have_content("-£10.00")
     end
 
     # Reduce quantity by 1, making promotion not apply.
@@ -53,14 +53,14 @@ RSpec.describe 'Quantity Promotions', type: :system, js: true do
     fill_in "order_line_items_attributes_0_quantity", with: 3
     click_button "Update"
     within("#cart_adjustments") do
-      expect(page).to have_content("-$10.00")
+      expect(page).to have_content("-£10.00")
     end
 
     # Bump quantity to 4, making promotion apply "twice."
     fill_in "order_line_items_attributes_0_quantity", with: 4
     click_button "Update"
     within("#cart_adjustments") do
-      expect(page).to have_content("-$20.00")
+      expect(page).to have_content("-£20.00")
     end
   end
 
@@ -75,7 +75,7 @@ RSpec.describe 'Quantity Promotions', type: :system, js: true do
     click_button "Apply Code"
     expect(page).to have_content("The coupon code was successfully applied to your order")
     within("#cart_adjustments") do
-      expect(page).to have_content("-$10.00")
+      expect(page).to have_content("-£10.00")
     end
 
     # Add a different product to our cart with quantity of 2.
@@ -86,7 +86,7 @@ RSpec.describe 'Quantity Promotions', type: :system, js: true do
 
     # We now have 5 items total, so discount should increase.
     within("#cart_adjustments") do
-      expect(page).to have_content("-$20.00")
+      expect(page).to have_content("-£20.00")
     end
   end
 
@@ -109,7 +109,7 @@ RSpec.describe 'Quantity Promotions', type: :system, js: true do
       click_button "Apply Code"
       expect(page).to have_content("The coupon code was successfully applied to your order")
       within("#cart_adjustments") do
-        expect(page).to have_content("-$15.00")
+        expect(page).to have_content("-£15.00")
       end
 
       # Add two different products to our cart
@@ -117,14 +117,14 @@ RSpec.describe 'Quantity Promotions', type: :system, js: true do
       click_link "E-11"
       add_to_cart
       within("#cart_adjustments") do
-        expect(page).to have_content("-$15.00")
+        expect(page).to have_content("-£15.00")
       end
 
       # Reduce quantity of first item to 2
       fill_in "order_line_items_attributes_0_quantity", with: 2
       click_button "Update"
       within("#cart_adjustments") do
-        expect(page).to have_content("-$15.00")
+        expect(page).to have_content("-£15.00")
       end
     end
   end

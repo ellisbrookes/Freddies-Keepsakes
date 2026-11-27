@@ -28,7 +28,7 @@ RSpec.describe 'First Order promotion', type: :system do
     expect(page).to have_content("The coupon code was successfully applied to your order")
 
     within("#cart_adjustments") do
-      expect(page).to have_content("-$10.00")
+      expect(page).to have_content("-£10.00")
     end
   end
 

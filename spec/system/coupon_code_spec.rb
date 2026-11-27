@@ -63,14 +63,14 @@ RSpec.describe 'Coupon code promotions', type: :system, js: true do
           expect(page).to have_content(I18n.t('spree.coupon_code_not_found'))
           fill_in "order_coupon_code", with: "onetwo"
           click_button "Apply Code"
-          expect(page).to have_content("Promotion (Onetwo) -$10.00", normalize_ws: true)
+          expect(page).to have_content("Promotion (Onetwo) -£10.00", normalize_ws: true)
         end
 
         context "with a promotion" do
           it "applies a promotion to an order" do
             fill_in "order_coupon_code", with: "onetwo"
             click_button "Apply Code"
-            expect(page).to have_content("Promotion (Onetwo) -$10.00", normalize_ws: true)
+            expect(page).to have_content("Promotion (Onetwo) -£10.00", normalize_ws: true)
           end
         end
       end
@@ -159,7 +159,7 @@ RSpec.describe 'Coupon code promotions', type: :system, js: true do
 
           fill_in "coupon_code", with: "onetwo"
           click_button "Apply Code"
-          expect(page).to have_content(I18n.t(:item_total_less_than_or_equal, scope: [ :spree, :eligibility_errors, :messages ], amount: "$100.00"))
+          expect(page).to have_content(I18n.t(:item_total_less_than_or_equal, scope: [ :spree, :eligibility_errors, :messages ], amount: "£100.00"))
         end
       end
 
@@ -199,11 +199,11 @@ RSpec.describe 'Coupon code promotions', type: :system, js: true do
             # 20% of $40 = 8
             # 20% of $20 = 4
             # Therefore: promotion discount amount is $12.
-            expect(page).to have_content("Promotion (Onetwo) -$12.00", normalize_ws: true)
+            expect(page).to have_content("Promotion (Onetwo) -£12.00", normalize_ws: true)
           end
 
           within '.cart-footer__total' do
-            expect(page).to have_content("$48.00")
+            expect(page).to have_content("£48.00")
           end
         end
       end
@@ -231,18 +231,18 @@ RSpec.describe 'Coupon code promotions', type: :system, js: true do
           visit cart_path
 
           within '.cart-footer__total' do
-            expect(page).to have_content("$30.00")
+            expect(page).to have_content("£30.00")
           end
 
           fill_in "coupon_code", with: "onetwo"
           click_button "Apply Code"
 
           within '#cart_adjustments' do
-            expect(page).to have_content("Promotion (Onetwo) -$30.00", normalize_ws: true)
+            expect(page).to have_content("Promotion (Onetwo) -£30.00", normalize_ws: true)
           end
 
           within '.cart-footer__total' do
-            expect(page).to have_content("$0.00")
+            expect(page).to have_content("£0.00")
           end
 
           fill_in "order_line_items_attributes_0_quantity", with: 2
@@ -250,11 +250,11 @@ RSpec.describe 'Coupon code promotions', type: :system, js: true do
           click_button "Update"
 
           within '#cart_adjustments' do
-            expect(page).to have_content("Promotion (Onetwo) -$60.00", normalize_ws: true)
+            expect(page).to have_content("Promotion (Onetwo) -£60.00", normalize_ws: true)
           end
 
           within '.cart-footer__total' do
-            expect(page).to have_content("$0.00")
+            expect(page).to have_content("£0.00")
           end
         end
       end

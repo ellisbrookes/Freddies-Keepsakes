@@ -6,7 +6,7 @@ RSpec.feature 'Checkout', :js, type: :system do
   include SolidusStarterFrontend::System::CheckoutHelpers
 
   given!(:store) { create(:store) }
-  given!(:country) { create(:country, name: 'United States', states_required: true) }
+  given!(:country) { Spree::Country.find_by!(iso: 'US').tap { |us| us.update!(name: 'United States', states_required: true) } }
   given!(:state) { create(:state, name: 'Alabama', country: country) }
   given!(:shipping_method) do
     shipping_method = create(:shipping_method)

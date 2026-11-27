@@ -60,7 +60,7 @@ RSpec.describe 'Checkout', :js, type: :system do
         save_and_continue
         expect(page).not_to have_content("undefined method `promotion'")
         save_and_continue
-        expect(page).to have_content("Shipping total:\n$10.00")
+        expect(page).to have_content("Shipping total:\n£10.00")
       end
     end
 
@@ -318,7 +318,7 @@ RSpec.describe 'Checkout', :js, type: :system do
       check_payment_method = create(:check_payment_method)
 
       user = create(:user)
-      create(:store_credit, user: user)
+      create(:store_credit, user: user, currency: Spree::Config.currency)
       order = Spree::TestingSupport::OrderWalkthrough.up_to(:payment, user: user)
 
       allow(order).to receive_messages(available_payment_methods: [ check_payment_method, credit_card_payment_method ])
@@ -537,7 +537,7 @@ RSpec.describe 'Checkout', :js, type: :system do
       click_on "Apply Code"
 
       expect(page).to have_content(promotion.name)
-      expect(page).to have_content("-$2.00")
+      expect(page).to have_content("-£2.00")
     end
 
     context "with invalid coupon" do
@@ -659,6 +659,8 @@ RSpec.describe 'Checkout', :js, type: :system do
       # access to the state_name input
       let!(:canada) { create(:country, name: 'Canada', iso: "CA", states_required: true) }
       before do
+        # The shop turns the state/county field off; switch it on to test escaping it.
+        stub_spree_preferences(address_requires_state: true)
         canada.states.destroy_all
         zone.members.create!(zoneable: canada)
       end
@@ -685,7 +687,7 @@ RSpec.describe 'Checkout', :js, type: :system do
 
         select "Canada", from: "order_bill_address_attributes_country_id"
         fill_in state_name_css, with: xss_string
-        fill_in "Zip", with: "H0H0H0"
+        fill_in "Postcode", with: "H0H0H0"
 
         save_and_continue
         visit checkout_state_path(:address)
@@ -748,12 +750,11 @@ RSpec.describe 'Checkout', :js, type: :system do
   def fill_in_address
     address = "order_bill_address_attributes"
     fill_in "#{address}_name", with: "Ryan Bigg"
-    fill_in "#{address}_address1", with: "143 Swan Street"
-    fill_in "#{address}_city", with: "Richmond"
-    select "United States of America", from: "#{address}_country_id"
-    select "Alabama", from: "#{address}_state_id"
-    fill_in "#{address}_zipcode", with: "12345"
-    fill_in "#{address}_phone", with: "(555) 555-5555"
+    fill_in "#{address}_address1", with: "1 High Street"
+    fill_in "#{address}_city", with: "Leeds"
+    select "United Kingdom", from: "#{address}_country_id"
+    fill_in "#{address}_zipcode", with: "LS1 1AA"
+    fill_in "#{address}_phone", with: "0113 496 0000"
   end
 
   def add_mug_to_cart

@@ -60,7 +60,7 @@ RSpec.describe 'Template rendering', type: :system do
     visit nested_taxons_path(taxon)
 
     within "#sidebar_products_search" do
-      check "Under $10.00"
+      check "Under £10.00"
       click_on "Search"
     end
     expect(page).to have_content "No products found"
@@ -68,7 +68,7 @@ RSpec.describe 'Template rendering', type: :system do
     expect(
       URI.decode_uri_component find('link[rel=canonical]')[:href]
     ).to eql(
-      "http://spreestore.example.com/t/solidus-brand/accessories?search[price_range_any][]=Under+$10.00"
+      "http://spreestore.example.com/t/solidus-brand/accessories?search[price_range_any][]=Under+£10.00"
     )
   end
 

@@ -58,8 +58,12 @@ module SolidusStarterFrontend
         fields.each do |field|
           fill_in "order_bill_address_attributes_#{field}", with: address.send(field).to_s
         end
-        select "United States of America", from: "order_bill_address_attributes_country_id"
-        select address.state.name.to_s, from: "order_bill_address_attributes_state_id"
+        select address.country.name, from: "order_bill_address_attributes_country_id"
+        # The shop doesn't ask for a county (address_requires_state is off), so
+        # only pick one when a spec has switched the state field back on.
+        if Spree::Config.address_requires_state && address.state
+          select address.state.name.to_s, from: "order_bill_address_attributes_state_id"
+        end
 
         check 'order_use_billing'
       end

@@ -1,3 +1,48 @@
 <%= render layout: "pages/page" do %>
-  <%# Add the terms content here. %>
+  <p>These terms apply when you buy from Freddies Personalised Boutique. Please read them before ordering. Nothing here affects your legal rights as a consumer.</p>
+
+  <h2>About me</h2>
+  <p>Freddies Personalised Boutique is run by <%= fill_in_later("your full name") %>, a sole trader based in the UK. You can contact me at <%= fill_in_later("your business email address") %>.</p>
+
+  <h2>Your order</h2>
+  <ul>
+    <li>When you place an order you'll get an email confirming I've received it. That's when our agreement starts.</li>
+    <li>If I can't accept your order (for example, if an item has sold out or there's a mistake in the price), I'll let you know and refund anything you've paid.</li>
+    <li>You must be 18 or over to place an order.</li>
+  </ul>
+
+  <h2>Personalisation</h2>
+  <ul>
+    <li><strong>Please check your personalisation carefully.</strong> I'll make it exactly as you type it, including spelling, capital letters and punctuation.</li>
+    <li>If I've made a mistake, I'll remake it for free. Mistakes in what was typed at the order stage aren't covered, so please contact me straight away if you spot one, and I'll fix it if I haven't started making your item yet.</li>
+    <li>I may refuse personalisation that is offensive, unlawful, or uses someone else's trademarks or copyright. If so I'll contact you, and refund you if we can't agree on an alternative.</li>
+    <li>Everything is handmade, so small differences in colour and placement from the photos are normal. Screens also show colours slightly differently.</li>
+  </ul>
+
+  <h2>Prices and payment</h2>
+  <ul>
+    <li>Prices are in pounds sterling (£). The price you pay is the one shown when you order, plus delivery, which is shown before you pay.</li>
+    <li>Payment is taken when you place your order.</li>
+  </ul>
+
+  <h2>Delivery</h2>
+  <ul>
+    <li>I currently deliver to UK addresses only.</li>
+    <li>Delivery times are estimates. Personalised items need time to make before they're posted. See <a href="<%= delivery_page_path %>">delivery information</a> for details.</li>
+    <li>If your parcel is late or doesn't arrive, please <a href="<%= contact_page_path %>">get in touch</a> and I'll help sort it out.</li>
+  </ul>
+
+  <h2>Returns and refunds</h2>
+  <p>See <a href="<%= returns_page_path %>">returns &amp; refunds</a>. In short: personalised items can't be returned if you change your mind, but anything faulty or that I've got wrong will be put right. Non-personalised items can be returned within 14 days.</p>
+
+  <h2>If something goes wrong</h2>
+  <p>If I don't keep to these terms, I'm responsible for loss or damage you suffer that was a foreseeable result. I'm not responsible for loss that wasn't foreseeable. Nothing here limits my responsibility where it would be unlawful to do so, including for faulty goods under the Consumer Rights Act 2015.</p>
+
+  <h2>Your information</h2>
+  <p>How I use your personal information is explained in the <a href="<%= privacy_policy_page_path %>">privacy policy</a>.</p>
+
+  <h2>The law that applies</h2>
+  <p>These terms are governed by the law of <%= fill_in_later("England and Wales, or Scotland / Northern Ireland if you live there") %>. If there's a disagreement, please contact me first and I'll do my best to resolve it.</p>
+
+  <p><em>Last updated: <%= fill_in_later("date you publish this") %>.</em></p>
 <% end %>

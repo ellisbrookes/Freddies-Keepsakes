@@ -1,3 +1,41 @@
 <%= render layout: "pages/page" do %>
-  <%# Add the cookie-policy content here. %>
+  <p>Cookies are small files a website stores in your browser. This website only uses the ones it needs to work. There are no advertising cookies and no tracking or analytics, so there's nothing for you to accept or turn off.</p>
+
+  <h2>Cookies this website uses</h2>
+  <div class="not-prose overflow-x-auto">
+    <table class="w-full text-left text-body-sm border-collapse">
+      <thead>
+        <tr class="border-b border-gray-300 dark:border-gray-600">
+          <th class="py-2 pr-4 font-sans-md">Cookie</th>
+          <th class="py-2 pr-4 font-sans-md">What it's for</th>
+          <th class="py-2 font-sans-md">How long it lasts</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="border-b border-gray-200 dark:border-gray-700">
+          <td class="py-2 pr-4 align-top w-1/3"><code class="break-all">_freddies_personalised_boutique_session</code></td>
+          <td class="py-2 pr-4 align-top">Keeps you signed in and keeps the website secure as you move between pages.</td>
+          <td class="py-2 align-top">Until you close your browser</td>
+        </tr>
+        <tr class="border-b border-gray-200 dark:border-gray-700">
+          <td class="py-2 pr-4 align-top w-1/3"><code class="break-all">guest_token</code></td>
+          <td class="py-2 pr-4 align-top">Remembers your basket and order if you shop without an account.</td>
+          <td class="py-2 align-top">Up to 20 years, or until you clear your cookies</td>
+        </tr>
+        <tr>
+          <td class="py-2 pr-4 align-top w-1/3"><code class="break-all">remember_spree_user_token</code></td>
+          <td class="py-2 pr-4 align-top">Only if you tick "Remember me" when signing in: keeps you signed in next time.</td>
+          <td class="py-2 align-top">Up to 2 weeks</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Your light or dark mode choice</h2>
+  <p>If you use the light/dark switch, your choice is saved in your browser so the site looks the way you like next time. It isn't sent to me or anyone else.</p>
+
+  <h2>Managing cookies</h2>
+  <p>You can delete or block cookies in your browser settings. If you block them, your basket and signing in won't work.</p>
+
+  <p>If anything changes (for example, if the shop starts using a payment provider that sets its own cookies), this page will be updated. Questions? <a href="<%= contact_page_path %>">Get in touch</a>.</p>
 <% end %>

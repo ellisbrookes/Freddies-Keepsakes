@@ -1,3 +1,32 @@
 <%= render layout: "pages/page" do %>
-  <%# Add the returns content here. %>
+  <p>I want you to love what you order. If something isn't right, here's how returns and refunds work. None of this affects your legal rights as a customer.</p>
+
+  <h2>Personalised items</h2>
+  <p>Items made with your own name, date or message are made especially for you, so they <strong>can't be returned just because you've changed your mind</strong>. The law treats made-to-order personalised goods differently from ordinary stock.</p>
+  <p>That's why I ask you to check your personalisation carefully before ordering: I'll make it exactly as you type it, including spelling, capital letters and punctuation.</p>
+  <p>If I've made a mistake (for example, a spelling that's different from what you typed) or your item arrives faulty or damaged, that's different. Please see <a href="#faulty">faulty or damaged items</a> below and I'll put it right.</p>
+
+  <h2>Items that aren't personalised</h2>
+  <p>If you've ordered something that isn't personalised, you can cancel your order for any reason within <strong>14 days of receiving it</strong>.</p>
+  <ul>
+    <li><strong>To cancel</strong>, <a href="<%= contact_page_path %>">get in touch</a> within those 14 days and tell me your order number and which items you're returning.</li>
+    <li><strong>Send the item back</strong> within 14 days of telling me. Please return it unused, in its original condition and packaging if possible.</li>
+    <li><strong>Return postage</strong> is paid by you, unless the item is faulty or I sent the wrong thing. I'd recommend using a tracked service, as you're responsible for the parcel until it reaches me.</li>
+    <li><strong>Your refund</strong> will be made within 14 days of me receiving the item back (or of you showing me proof that you've posted it, if that's sooner). It will go back to the payment method you used, and includes the standard delivery cost you paid when you ordered.</li>
+  </ul>
+  <p>If an item comes back used or damaged, I may reduce the refund to reflect that.</p>
+
+  <h2 id="faulty">Faulty or damaged items</h2>
+  <p>If anything arrives faulty, damaged or not as described, including personalised items, please <a href="<%= contact_page_path %>">get in touch</a> as soon as you can with your order number and a photo of the problem.</p>
+  <ul>
+    <li>Within <strong>30 days</strong> of delivery you can choose a full refund.</li>
+    <li>Otherwise I'll offer a repair or replacement, or a refund if that isn't possible.</li>
+    <li>I'll cover the cost of sending a faulty item back.</li>
+  </ul>
+
+  <h2>Cancelling before I've started</h2>
+  <p>If you change your mind about a personalised order, let me know straight away. If I haven't started making it yet, I'll always try to cancel it and refund you in full.</p>
+
+  <h2>Returns address</h2>
+  <p>Please <a href="<%= contact_page_path %>">contact me</a> before sending anything back, and I'll confirm where to send it: <%= fill_in_later("returns address") %>.</p>
 <% end %>

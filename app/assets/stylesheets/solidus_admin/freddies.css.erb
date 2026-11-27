@@ -1,0 +1,145 @@
+/*
+ * Freddies Keepsakes theme for SolidusAdmin (/admin).
+ *
+ * Loads the admin's precompiled Tailwind build from the gem, then recolours it
+ * with the storefront palette (config/tailwind.config.js): slate sidebar, teal
+ * accent buttons and links, gold active nav item, Source Serif page titles.
+ * Registered as the "freddies" theme in config/initializers/solidus_admin.rb.
+ *
+ *= require solidus_admin/tailwind.css
+ *= require_self
+ */
+
+@font-face {
+  font-family: "Source Serif Medium";
+  src: url("<%= asset_path('source-serif/source-serif-4-v8-latin-500.woff2') %>") format("woff2");
+  font-display: swap;
+}
+
+:root {
+  --fk-slate: #566475;
+  --fk-slate-dark: #465361;
+  --fk-slate-deep: #2E3843;
+  --fk-gold: #D9B66A;
+  --fk-gold-light: #EAD49A;
+  --fk-accent-50: #EEF9FA;
+  --fk-accent-600: #17748A;
+  --fk-accent-700: #115C6F;
+  --fk-accent-800: #0C4554;
+  --fk-ink: #28313B;
+  --fk-sand: #F2F4F7;
+  --fk-muted-on-slate: #BAC4CF;
+}
+
+/* ---------- Page ---------- */
+
+body.bg-gray-15 {
+  background-color: var(--fk-sand);
+}
+
+.text-black {
+  color: var(--fk-ink);
+}
+
+/* Page titles in the storefront's heading serif */
+#main h1.text-2xl.font-bold {
+  font-family: "Source Serif Medium", Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.body-link {
+  color: var(--fk-accent-600);
+}
+
+/* ---------- Primary buttons (bg-black + hover:bg-gray-600 only appears on them) ---------- */
+
+.bg-black.hover\:bg-gray-600 {
+  background-color: var(--fk-accent-600);
+}
+
+.bg-black.hover\:bg-gray-600:hover,
+.bg-black.hover\:bg-gray-600:focus {
+  background-color: var(--fk-accent-700);
+}
+
+.bg-black.hover\:bg-gray-600:active,
+.bg-black.hover\:bg-gray-600[aria-current="true"] {
+  background-color: var(--fk-accent-800);
+}
+
+.bg-black.hover\:bg-gray-600:disabled,
+.bg-black.hover\:bg-gray-600[aria-disabled="true"] {
+  background-color: #dedede;
+  color: #a3a3a3;
+}
+
+/* Toggle switches */
+.checked\:bg-gray-500:checked {
+  background-color: var(--fk-accent-600);
+}
+
+/* ---------- Sidebar ---------- */
+/*
+ * The sidebar wrapper is body > div.flex > div.min-w-[240px]. Everything below is
+ * scoped to the sidebar, and skips the white account pop-up menu inside it.
+ */
+
+body > div.flex > div.min-w-\[240px\] {
+  background-color: var(--fk-slate-deep);
+  border-right-color: var(--fk-slate-deep);
+}
+
+body > div.flex > div.min-w-\[240px\] nav.bg-gray-15 {
+  background-color: var(--fk-slate-deep);
+}
+
+body > div.flex > div.min-w-\[240px\] :is(.text-black, .text-gray-500, .text-gray-600):not(details ul, details ul *) {
+  color: var(--fk-sand);
+}
+
+body > div.flex > div.min-w-\[240px\] li li a.text-gray-600 {
+  color: var(--fk-muted-on-slate);
+}
+
+body > div.flex > div.min-w-\[240px\] .text-xs.text-gray-500 {
+  color: var(--fk-muted-on-slate);
+}
+
+body > div.flex > div.min-w-\[240px\] .border-gray-100:not(details ul) {
+  border-color: var(--fk-slate-dark);
+}
+
+body > div.flex > div.min-w-\[240px\] .fill-gray-400 {
+  fill: var(--fk-muted-on-slate);
+}
+
+/* Nav item hover */
+body > div.flex > div.min-w-\[240px\] :is(.hover\:bg-gray-50, .hover\:bg-gray-25):hover:not(details ul *),
+body > div.flex > div.min-w-\[240px\] details[open] > summary {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+body > div.flex > div.min-w-\[240px\] .hover\:text-red-500:hover {
+  color: var(--fk-gold-light);
+}
+
+/* Current section / page */
+body > div.flex > div.min-w-\[240px\] nav li > a.text-red-600,
+body > div.flex > div.min-w-\[240px\] nav li > a[aria-current="page"] {
+  color: var(--fk-gold-light);
+}
+
+body > div.flex > div.min-w-\[240px\] a.text-red-600.bg-gray-50 {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Account avatar */
+body > div.flex > div.min-w-\[240px\] summary .fill-yellow {
+  fill: var(--fk-gold);
+}
+
+/* Full horizontal logo (teal + gold reads well on slate), larger than the stock 28px */
+body > div.flex > div.min-w-\[240px\] nav > a:first-child img {
+  max-height: 3rem;
+}

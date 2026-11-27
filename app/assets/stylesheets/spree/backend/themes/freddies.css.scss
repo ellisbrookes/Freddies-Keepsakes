@@ -1,0 +1,109 @@
+// Freddies Keepsakes theme for the legacy Solidus backend (the admin pages
+// SolidusAdmin hasn't replaced yet, e.g. orders). Same imports as the gem's
+// spree/backend/themes/solidus_admin theme, with the brand palette swapped in
+// after its variables. Registered as "freddies" in config/initializers/spree.rb.
+
+@import "spree/backend/globals";
+
+@import "spree/backend/themes/solidus_admin/variables";
+@import "spree/backend/themes/solidus_admin/colors";
+
+$fk-slate-dark: #465361;
+$fk-slate-deep: #2E3843;
+$fk-gold: #D9B66A;
+$fk-gold-light: #EAD49A;
+$fk-accent-600: #17748A;
+$fk-accent-700: #115C6F;
+$fk-ink: #28313B;
+$fk-sand: #F2F4F7;
+$fk-muted-on-slate: #BAC4CF;
+
+$color-dark: $fk-ink;
+$color-primary: $fk-accent-600;
+
+// Slate sidebar with gold active item, like the storefront header
+$color-sidebar-bg: $fk-slate-deep;
+$color-sidebar-border: $fk-slate-deep;
+$color-navbar: $fk-sand;
+$color-navbar-bg: $fk-slate-deep;
+$color-navbar-active: $fk-gold-light;
+$color-navbar-active-bg: rgba(255, 255, 255, 0.1);
+$color-navbar-submenu: $fk-muted-on-slate;
+$color-navbar-submenu-bg: $fk-slate-deep;
+$color-navbar-submenu-active: $fk-gold-light;
+$color-navbar-footer: $fk-sand;
+$color-navbar-footer-bg: $fk-slate-deep;
+$color-navbar-footer-active: $fk-gold-light;
+$color-icon-navbar: $fk-muted-on-slate;
+$color-navbar-hover-bg: $fk-slate-dark;
+$color-navbar-hover: $fk-gold-light;
+
+$color-tab-active: $fk-accent-600;
+$pagination-color: $fk-accent-600;
+$pagination-hover-color: $fk-accent-700;
+
+$link-color: $fk-accent-600;
+$link-hover-color: $fk-accent-700;
+
+@import "spree/backend/vendor";
+@import "spree/backend/shared";
+@import "spree/backend/components";
+@import "spree/backend/plugins";
+@import "spree/backend/sections";
+
+@import "spree/backend/themes/solidus_admin/tables";
+
+// The legacy sidebar hard-codes Solidus greys, so recolour it directly to
+// match the slate sidebar in the new admin. The account pop-up stays white.
+.solidus-admin--nav {
+  background-color: $fk-slate-deep;
+  border-right-color: $fk-slate-deep;
+  color: $fk-sand;
+
+  &--logo img {
+    max-height: 48px;
+  }
+
+  &--store-link {
+    border-color: $fk-slate-dark;
+
+    &--name { color: $fk-sand; }
+    &--url { color: $fk-muted-on-slate; }
+    svg { fill: $fk-muted-on-slate; }
+  }
+
+  &--menu {
+    li > a,
+    li > label {
+      color: $fk-sand;
+    }
+
+    ul li a {
+      color: $fk-muted-on-slate;
+    }
+
+    li.selected > a {
+      background: rgba(255, 255, 255, 0.1);
+      color: $fk-gold-light;
+    }
+
+    li:not(.selected):hover > a,
+    li:not(.selected):hover > label {
+      background: rgba(255, 255, 255, 0.08);
+      color: $fk-gold-light;
+    }
+  }
+
+  &--footer summary {
+    color: $fk-sand;
+
+    &:hover,
+    [open] > & {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    svg {
+      fill: $fk-gold;
+    }
+  }
+}

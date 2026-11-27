@@ -41,7 +41,7 @@ Spree.config do |config|
 
   # Brand logos (storefront + legacy admin)
   config.logo = "logo_keepsakes.png"
-  config.admin_interface_logo = "logo_mark.png"
+  config.admin_interface_logo = "logo_keepsakes_horizontal.png"
 
   # Payment gateway credentials can be configured statically here and referenced from
   # the admin. They can also be fully configured from the admin.
@@ -96,4 +96,10 @@ end
 
 Spree::Backend::Config.configure do |config|
   config.unauthorized_redirect_handler_class = "AdminUnauthorizedRedirectHandler"
+
+  # Freddies Keepsakes brand theme for the legacy admin pages
+  # (app/assets/stylesheets/spree/backend/themes/freddies.css.scss).
+  config.themes = config.themes.merge(freddies: "spree/backend/themes/freddies")
+  config.theme = "freddies"
+  config.dark_theme = "freddies"
 end

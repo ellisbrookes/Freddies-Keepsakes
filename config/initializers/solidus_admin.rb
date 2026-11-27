@@ -10,7 +10,14 @@ SolidusAdmin::Config.configure do |config|
   # Path to the logo used in the admin interface.
   #
   # It needs to be a path to an image file accessible by Sprockets.
-  config.logo_path = "logo_mark.png"
+  config.logo_path = "logo_keepsakes_horizontal.png"
+
+  # Freddies Keepsakes brand theme (app/assets/stylesheets/solidus_admin/freddies.css.erb).
+  # Used for both light and dark OS settings; the stock Solidus themes stay
+  # selectable from the account menu.
+  config.themes = config.themes.merge(freddies: "solidus_admin/freddies")
+  config.theme = "freddies"
+  config.dark_theme = "freddies"
 
   # Add custom folder paths to watch for changes to trigger a cache sweep forcing a
   # regeneration of the importmap.

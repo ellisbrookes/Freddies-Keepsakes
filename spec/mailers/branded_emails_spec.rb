@@ -12,8 +12,8 @@ RSpec.describe "Branded shop emails", type: :mailer do
   shared_examples "a branded email" do
     it "has the logo (with a full URL) and the shop links" do
       body = html(mail)
-      logo = Nokogiri::HTML(body).at_css("img[alt='Freddies Personalised Boutique']")
-      expect(logo["src"]).to match(%r{\Ahttp://example\.com/assets/logo-[0-9a-f]+\.png\z})
+      logo = Nokogiri::HTML(body).at_css("img[alt='Freddies Keepsakes']")
+      expect(logo["src"]).to match(%r{\Ahttp://example\.com/assets/logo_keepsakes-[0-9a-f]+\.png\z})
       expect(body).to include('href="http://example.com/store"', 'href="http://example.com/contact"')
       expect(text(mail)).to include("Shop: http://example.com/store")
     end

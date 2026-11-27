@@ -7,7 +7,7 @@ RSpec.describe "Branded sign-in pages", type: :request do
 
   # The footer also shows the logo, so look for it inside the form's own <article>.
   def logo_in(article_id)
-    Nokogiri::HTML(response.body).at_css("article##{article_id} img[src*='/assets/logo-']")
+    Nokogiri::HTML(response.body).at_css("article##{article_id} img[src*='/assets/logo_keepsakes-']")
   end
 
   {

@@ -59,12 +59,12 @@ module.exports = {
         '85': '85%',
       },
       colors: {
-        // Freddies Personalised Boutique brand, sampled from the logo
+        // Freddies Keepsakes brand, sampled from the logo
         brand: {
           slate: '#566475',        // logo background
           'slate-dark': '#465361',
           'slate-deep': '#2E3843',
-          gold: '#D9B66A',         // "Boutique" lettering
+          gold: '#D9B66A',         // "Keepsakes" lettering
           'gold-light': '#EAD49A',
           teal: '#78D5D7',         // elephant
         },

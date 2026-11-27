@@ -2,8 +2,8 @@
 # check=error=true
 
 # This Dockerfile is designed for production, not development. Use with Kamal or build'n'run by hand:
-# docker build -t freddies_personalised_boutique .
-# docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name freddies_personalised_boutique freddies_personalised_boutique
+# docker build -t freddies_keepsakes .
+# docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name freddies_keepsakes freddies_keepsakes
 
 # For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
 

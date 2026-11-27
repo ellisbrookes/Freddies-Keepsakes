@@ -1,0 +1,15 @@
+<%= render partial: 'spree/shared/error_messages', locals: { target: @spree_user } %>
+<h1 class="admin-auth__title"><%= t('spree.change_my_password') %></h1>
+
+<%= form_for @spree_user, as: :spree_user, url: spree.update_password_path, method: :put, html: { class: "admin-auth__form" } do |f| %>
+  <div class="admin-auth__field">
+    <%= f.label :password, t('spree.password') %>
+    <%= f.password_field :password, class: 'form-control', autocomplete: 'new-password', autofocus: true %>
+  </div>
+  <div class="admin-auth__field">
+    <%= f.label :password_confirmation, t('spree.confirm_password') %>
+    <%= f.password_field :password_confirmation, class: 'form-control', autocomplete: 'new-password' %>
+  </div>
+  <%= f.hidden_field :reset_password_token %>
+  <%= f.submit t('spree.update'), class: 'btn btn-primary admin-auth__submit' %>
+<% end %>

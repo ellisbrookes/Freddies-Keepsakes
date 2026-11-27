@@ -1,0 +1,184 @@
+/*
+ * Admin login / password pages (layout: spree/layouts/admin_auth).
+ * Loaded after the backend theme, so it only handles layout and the card;
+ * inputs and buttons keep the theme's Bootstrap styles.
+ */
+
+@font-face {
+  font-family: "Source Serif Medium";
+  src: url("<%= asset_path('source-serif/source-serif-4-v8-latin-500.woff2') %>") format("woff2");
+  font-display: swap;
+}
+
+/* The backend theme pads <body> on the left for its sidebar; there is none here. */
+body.admin-auth {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: #2E3843;
+  background-image: radial-gradient(ellipse at top, #465361 0%, #2E3843 60%);
+  color: #28313B;
+}
+
+.admin-auth__main {
+  box-sizing: border-box;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 40px 16px;
+}
+
+.admin-auth__logo img {
+  display: block;
+  height: 64px;
+  width: auto;
+}
+
+.admin-auth__card {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 420px;
+  padding: 32px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.45);
+}
+
+.admin-auth__title {
+  margin: 0 0 4px;
+  font-family: "Source Serif Medium", Georgia, serif;
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: #28313B;
+}
+
+.admin-auth__subtitle {
+  margin: 0 0 24px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #616161;
+}
+
+.admin-auth__form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+}
+
+.admin-auth__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-auth__field label {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #28313B;
+}
+
+.admin-auth__field .form-control {
+  width: 100%;
+  height: 44px;
+  padding: 8px 12px;
+  font-size: 15px;
+  border-radius: 6px;
+}
+
+.admin-auth__field .form-control:focus {
+  border-color: #17748A;
+  box-shadow: 0 0 0 3px rgba(23, 116, 138, 0.2);
+}
+
+.admin-auth__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+
+.admin-auth__check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.admin-auth__check input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: #17748A;
+}
+
+.admin-auth__link {
+  color: #17748A;
+  font-size: 14px;
+}
+
+.admin-auth__link:hover {
+  color: #115C6F;
+}
+
+.admin-auth__submit.btn {
+  width: 100%;
+  height: 44px;
+  margin-top: 4px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 999px;
+}
+
+.admin-auth__footer {
+  margin: 20px 0 0;
+  text-align: center;
+}
+
+.admin-auth__flash {
+  margin: 0 0 20px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.admin-auth__flash--error,
+.admin-auth__flash--alert {
+  background: #f8d6d3;
+  color: #862219;
+}
+
+.admin-auth__flash--notice,
+.admin-auth__flash--success {
+  background: #D5F1F2;
+  color: #0C4554;
+}
+
+.admin-auth .errorExplanation {
+  margin: 0 0 20px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  background: #f8d6d3;
+  color: #862219;
+  font-size: 14px;
+}
+
+.admin-auth__back {
+  color: #BAC4CF;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.admin-auth__back:hover {
+  color: #EAD49A;
+}

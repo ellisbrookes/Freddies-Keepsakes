@@ -1,8 +1,7 @@
-<article class="wrapper grid-container py-12" id="forgot-password">
-  <div class="col-span-full md:col-start-5 md:col-span-4">
-    <h1 class="font-serif text-h4 md:text-h3 text-center"><%= I18n.t('spree.forgot_password') %></h1>
+<%= render layout: "shared/auth/card", locals: { id: "forgot-password" } do %>
+    <h1 class="font-serif text-h5 md:text-h4 text-center"><%= I18n.t('spree.forgot_password') %></h1>
 
-    <%= form_for Spree::User.new, as: :spree_user, url: reset_password_path, html: { class: "mt-6 space-y-6 mb-12" } do |f| %>
+    <%= form_for Spree::User.new, as: :spree_user, url: reset_password_path, html: { class: "mt-6 space-y-6" } do |f| %>
       <div class="text-input">
         <%= f.label :email, "#{t("spree.email")}:" %>
         <%= f.email_field :email, placeholder: 'name@example.com' %>
@@ -21,5 +20,4 @@
       </div>
 
     <% end %>
-  </div>
-</article>
+<% end %>

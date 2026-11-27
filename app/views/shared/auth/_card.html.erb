@@ -1,0 +1,29 @@
+<%#
+  Branded card for the sign-in, sign-up and password pages: the full logo on the
+  slate brand panel, with the form underneath.
+
+  Locals:
+    id:      id for the <article> (specs and anchors rely on these)
+    branded: false to render the plain layout instead (the sign-in form inside
+             the checkout "sign in or continue as guest" page)
+%>
+<% if local_assigns.fetch(:branded, true) %>
+  <article id="<%= id %>" class="wrapper py-10 md:py-16">
+    <div class="mx-auto w-full max-w-md overflow-hidden rounded-2xl bg-white shadow-xs ring-1 ring-black/5 dark:bg-light-black dark:ring-white/10">
+      <div class="flex justify-center bg-gradient-to-tr from-brand-slate-dark via-brand-slate to-[#677582] px-8 py-6">
+        <%= link_to root_path, title: current_store.name do %>
+          <%= image_tag "logo.png", alt: current_store.name, class: "w-48 sm:w-56" %>
+        <% end %>
+      </div>
+      <div class="px-6 pt-8 pb-10 sm:px-10">
+        <%= yield %>
+      </div>
+    </div>
+  </article>
+<% else %>
+  <article id="<%= id %>" class="wrapper grid-container py-12">
+    <div class="col-span-full md:col-start-5 md:col-span-4">
+      <%= yield %>
+    </div>
+  </article>
+<% end %>

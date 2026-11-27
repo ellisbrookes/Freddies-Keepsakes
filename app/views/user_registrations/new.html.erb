@@ -1,10 +1,9 @@
-<article class="wrapper grid-container py-12" id="new-customer">
-  <div class="col-span-full md:col-start-5 md:col-span-4">
-    <h1 class="font-serif text-h4 md:text-h3 text-center"><%= I18n.t('spree.new_customer') %></h1>
+<%= render layout: "shared/auth/card", locals: { id: "new-customer" } do %>
+    <h1 class="font-serif text-h5 md:text-h4 text-center"><%= I18n.t('spree.new_customer') %></h1>
 
     <%= render 'shared/error_messages', target: resource %>
 
-    <%= form_for resource, as: :spree_user, url: registration_path(resource), html: { class: "mt-6 space-y-6 mb-12" } do |f| %>
+    <%= form_for resource, as: :spree_user, url: registration_path(resource), html: { class: "mt-6 space-y-6" } do |f| %>
       <div class="text-input">
         <%= f.label :email, "#{t("spree.email")}:" %>
         <%= f.email_field :email, placeholder: 'name@example.com' %>
@@ -32,5 +31,4 @@
       </div>
 
     <% end %>
-  </div>
-</article>
+<% end %>

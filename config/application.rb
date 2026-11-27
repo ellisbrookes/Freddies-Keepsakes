@@ -6,7 +6,7 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module FreddiesPersonalisedBoutique
+module FreddiesKeepsakes
   class Application < Rails::Application
     if defined?(FactoryBotRails)
       initializer after: "factory_bot.set_factory_paths" do

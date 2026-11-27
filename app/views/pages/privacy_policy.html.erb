@@ -1,3 +1,54 @@
 <%= render layout: "pages/page" do %>
-  <%# Add the privacy-policy content here. %>
+  <p>This policy explains what personal information I collect when you use this website or place an order, why I need it, and your rights over it.</p>
+
+  <h2>Who I am</h2>
+  <p>Freddies Personalised Boutique is run by <%= fill_in_later("your full name") %>, a sole trader based in the UK. I'm responsible for your personal information (the "data controller").</p>
+  <p>You can contact me about anything in this policy at <%= fill_in_later("your business email address") %>.</p>
+
+  <h2>What information I collect</h2>
+  <ul>
+    <li><strong>Your contact details:</strong> name, email address, phone number, and billing and delivery address.</li>
+    <li><strong>Your order:</strong> what you've bought, any personalisation you've asked for, prices and delivery choices.</li>
+    <li><strong>Your account</strong>, if you create one: your email address and password. Passwords are stored in a scrambled (encrypted) form that I can't read.</li>
+    <li><strong>Payment details</strong> are handled by the payment provider. I never see or store your full card details.</li>
+    <li><strong>Messages</strong> you send me.</li>
+  </ul>
+
+  <h2>Why I use it</h2>
+  <ul>
+    <li><strong>To make and deliver your order</strong>, and to contact you about it. I need this to fulfil our contract.</li>
+    <li><strong>To keep business and tax records</strong>, which the law requires.</li>
+    <li><strong>To answer your questions</strong> and deal with returns or problems.</li>
+    <li><strong>To keep the website secure</strong> and prevent fraud. This is in my legitimate interests and yours.</li>
+  </ul>
+  <p>I don't send marketing emails, and I'll never sell your information.</p>
+
+  <h2>Who I share it with</h2>
+  <p>Only the services needed to run the shop, and only what they need:</p>
+  <ul>
+    <li><strong>Delivery companies</strong> (such as Royal Mail), to get your parcel to you.</li>
+    <li><strong>The payment provider</strong>, <%= fill_in_later("payment provider, e.g. Stripe or PayPal") %>, to take your payment.</li>
+    <li><strong>The website's hosting and email services</strong>, which store and send information for me: <%= fill_in_later("hosting provider and email provider") %>.</li>
+  </ul>
+  <p>Some of these may store information outside the UK. Where they do, they're required to protect it to UK standards.</p>
+
+  <h2>How long I keep it</h2>
+  <p>Order and payment records are kept for about 6 years, as HMRC requires for tax purposes. If you have an account, I keep it until you ask me to close it. Messages are kept for as long as they're needed to help you.</p>
+
+  <h2>Your rights</h2>
+  <p>You have the right to:</p>
+  <ul>
+    <li>ask for a copy of the information I hold about you;</li>
+    <li>ask me to correct anything that's wrong;</li>
+    <li>ask me to delete your information (unless I have to keep it, for example for tax records);</li>
+    <li>object to or ask me to limit how I use it;</li>
+    <li>ask for your information in a format you can take elsewhere.</li>
+  </ul>
+  <p>To do any of these, email me at <%= fill_in_later("your business email address") %>. I'll reply within one month.</p>
+  <p>If you're unhappy with how I've handled your information, please tell me first. You can also complain to the Information Commissioner's Office (ICO) at <a href="https://ico.org.uk/make-a-complaint/">ico.org.uk</a> or on 0303 123 1113.</p>
+
+  <h2>Cookies</h2>
+  <p>See the <a href="<%= cookie_policy_page_path %>">cookie policy</a> for the small number of cookies this website uses.</p>
+
+  <p><em>Last updated: <%= fill_in_later("date you publish this") %>.</em></p>
 <% end %>
